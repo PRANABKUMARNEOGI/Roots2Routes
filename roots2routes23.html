@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roots2Routes - Live Capacity</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f4f4f5; padding: 20px; }
+        .grid { display: grid; gap: 15px; max-width: 600px; margin: 0 auto; }
+        .card { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .dest-body { font-size: 1.2rem; font-weight: bold; margin-bottom: 10px; }
+        .load-badge { display: flex; align-items: center; font-size: 0.9rem; color: #555; }
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; margin-right: 8px; background: #ccc; }
+    </style>
+</head>
+<body>
+    <div class="grid">
+        <h2>Live Destination Status</h2>
+        
+        <div class="card">
+            <div class="dest-body">Chitrakote Falls</div>
+            <div class="load-badge"><span class="status-dot"></span><span class="load">Connecting...</span></div>
+        </div>
+
+        <div class="card">
+            <div class="dest-body">Tirathgarh Falls</div>
+            <div class="load-badge"><span class="status-dot"></span><span class="load">Connecting...</span></div>
+        </div>
+        
+        <div class="card">
+            <div class="dest-body">Barnawapara Wildlife Sanctuary</div>
+            <div class="load-badge"><span class="status-dot"></span><span class="load">Connecting...</span></div>
+        </div>
+
+        <!-- Interactive WhatsApp Card -->
+        <div class="card" style="margin-top: 15px; padding: 24px; border-radius: 16px; background: #ffffff;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+                <span style="font-size: 1.2rem;">💬</span>
+                <h3 style="margin: 0; font-size: 1.15rem;">WhatsApp assistant</h3>
+            </div>
+            <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 16px;">
+                Query live capacity and smart rerouting directly in real time.
+            </p>
+
+            <!-- Simulated Chat Window -->
+            <div id="chat-window" style="background: #efeae2; border-radius: 12px; padding: 12px; height: 180px; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; font-family: sans-serif; font-size: 0.85rem;">
+                <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+                    Namaste! Ask me about live crowd levels in Bastar & Surguja.
+                </div>
+            </div>
+
+            <!-- Message Input Box -->
+            <div style="display: flex; gap: 8px; margin-top: 10px;">
+                <input id="chat-input" type="text" placeholder="e.g. Is Chitrakote crowded?" 
+                       style="flex: 1; padding: 8px 12px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; outline: none;"
+                       onkeydown="if(event.key === 'Enter') sendWhatsAppMessage()">
+                <button onclick="sendWhatsAppMessage()" 
+                        style="background: #15803d; color: white; border: none; padding: 8px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem;">
+                    Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 1. Live Capacity Fetching Logic
+        const statusColors = { 'low': '#10b981', 'mod': '#f59e0b', 'high': '#ef4444' };
+
+        async function fetchLiveCapacity() {
+            try {
+                const response = await fetch('http://localhost:5000/api/v1/destinations/live');
+                const { data } = await response.json();
+
+                data.forEach(dest => {
+                    const elements = Array.from(document.querySelectorAll('.dest-body'));
+                    elements.forEach(el => {
+                        if (el.textContent.includes(dest.name)) {
+                            const badge = el.parentElement.querySelector('.load');
+                            const dot = el.parentElement.querySelector('.status-dot');
+                            
+                            if (badge) badge.innerText = `${dest.percentage}% capacity`;
+                            if (dot) dot.style.background = statusColors[dest.status] || '#ccc';
+                        }
+                    });
+                });
+            } catch (err) {
+                console.error('Backend offline:', err);
+            }
+        }
+
+        fetchLiveCapacity();
+        setInterval(fetchLiveCapacity, 60000);
+
+        // 2. WhatsApp Chatbot Logic
+        async function sendWhatsAppMessage() {
+            const input = document.getElementById('chat-input');
+            const window = document.getElementById('chat-window');
+            const msg = input.value.trim();
+            if (!msg) return;
+
+            // Append user message bubble
+            window.innerHTML += `
+                <div style="align-self: flex-end; background: #dcf8c6; padding: 8px 12px; border-radius: 8px 8px 2px 8px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+                    ${msg}
+                </div>
+            `;
+            input.value = '';
+            window.scrollTop = window.scrollHeight;
+
+            try {
+                const res = await fetch('http://localhost:5000/api/v1/whatsapp/webhook', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: msg })
+                });
+                const data = await res.json();
+
+                // Append bot response bubble
+                window.innerHTML += `
+                    <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.08); white-space: pre-line;">
+                        ${data.reply}
+                    </div>
+                `;
+            } catch (e) {
+                window.innerHTML += `
+                    <div style="align-self: flex-start; background: #fee2e2; color: #b91c1c; padding: 8px 12px; border-radius: 8px; max-width: 85%;">
+                        Bot offline. Ensure backend is running.
+                    </div>
+                `;
+            }
+            window.scrollTop = window.scrollHeight;
+        }
+    </script>
+</body>
+</html>

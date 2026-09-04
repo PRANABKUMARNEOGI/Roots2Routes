@@ -19,25 +19,19 @@ const apiLimiter = rateLimit({
 app.use('/api/', apiLimiter);
 
 // 1. GET all live destinations
-app.get('/api/v1/destinations/live', async (req, res) => {
+ app.get('/api/v1/destinations/live', async (req, res) => {
     try {
         const keys = await cache.keys('dest:*');
         const destinations = [];
-
         for (const key of keys) {
             const data = await cache.hGetAll(key);
             if (Object.keys(data).length > 0) {
-                destinations.push({
-                    ...data,
-                    percentage: parseInt(data.percentage),
-                    queue_time_mins: parseInt(data.queue_time_mins)
-                });
+                destinations.push(data);
             }
         }
-
-        res.json({ count: destinations.length, data: destinations });
+        res.json({ data: destinations });
     } catch (err) {
-        res.status(500).json({ error: 'Failed to fetch live capacity' });
+        res.status(500).json({ error: err.message });
     }
 });
 

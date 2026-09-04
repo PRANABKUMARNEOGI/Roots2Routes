@@ -644,11 +644,13 @@
   </div>
 </footer>
 <script>
-    async function sendWhatsAppMessage() {
-        const input = document.getElementById('chat-input');
-        const window = document.getElementById('chat-window');
-        const msg = input.value.trim();
-        if (!msg) return;
+const API_URL = 'https://roots2routes-production.up.railway.app';
+
+async function sendWhatsAppMessage() {
+    const input = document.getElementById('chat-input');
+    const window = document.getElementById('chat-window');
+    const msg = input.value.trim();
+    if (!msg) return;
 
         // Append user message bubble
         window.innerHTML += `

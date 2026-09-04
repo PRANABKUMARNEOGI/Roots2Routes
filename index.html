@@ -702,9 +702,10 @@ let currentMarkers = [];
 const statusColors = { 'low': '#10b981', 'mod': '#f59e0b', 'high': '#ef4444' };
 
 // 2. Fetch Live Capacity & Update UI + Map + Grid Cards
+// 2. Fetch Live Capacity & Update UI + Map + Grid Cards
 async function fetchLiveCapacity() {
     try {
-        const response = await fetch('http://192.168.29.141:5000/api/v1/destinations/live');
+        const response = await fetch(`${API_URL}/api/v1/destinations/live`);
         const { data } = await response.json();
 
         // Clear old markers before redrawing

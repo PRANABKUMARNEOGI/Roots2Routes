@@ -663,12 +663,12 @@
         window.scrollTop = window.scrollHeight;
 
         try {
-            const res = await fetch('http://192.168.29.141:5000/api/v1/whatsapp/webhook', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message: msg })
-            });
-            const data = await res.json();
+        const response = await fetch(`${API_URL}/api/v1/whatsapp/webhook`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg })
+        });
+        const data = await response.json();
 
             // Append bot response bubble
             window.innerHTML += `
@@ -781,7 +781,7 @@ async function sendWhatsAppMessage() {
     window.scrollTop = window.scrollHeight;
 
     try {
-        const res = await fetch('http://192.168.29.141:5000/api/v1/whatsapp/webhook', {
+        const res = await fetch(`${API_URL}/api/v1/whatsapp/webhook`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: msg })
@@ -811,7 +811,7 @@ async function getSmartTripRecommendation() {
     resultBox.innerHTML = `<i>Calculating live telemetry across Chhattisgarh...</i>`;
 
     try {
-        const response = await fetch('http://192.168.29.141:5000/api/v1/routes/recommend', {
+        const response = await fetch(`${API_URL}/api/v1/routes/recommend`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ 

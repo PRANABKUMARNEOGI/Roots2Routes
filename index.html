@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<!-- Leaflet CSS -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+<!-- Leaflet JavaScript -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Roots2Routes — Tourism Load Balancing for Chhattisgarh</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --forest:#1E3F20;
+    --forest-light:#2F5A34;
+    --terracotta:#D96B43;
+    --terracotta-deep:#B85431;
+    --alabaster:#F9F8F6;
+    --charcoal:#121212;
+    --emerald:#3F8F5F;
+    --amber:#C08A2E;
+    --crimson:#B5453E;
+    --ink:#242920;
+    --line:rgba(30,63,32,0.14);
+    --bg:var(--alabaster);
+    --surface:#ffffff;
+    --surface-2:#F1EEE7;
+    --text:var(--ink);
+    --text-soft:#5B5F53;
+    --shadow: 0 20px 50px -20px rgba(30,63,32,0.35);
+    --font-serif:'Fraunces', Georgia, serif;
+    --font-sans:'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+  }
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  ::selection{background:var(--terracotta); color:#fff;}
+  .wrap{max-width:1180px; margin:0 auto; padding:0 40px;}
+  section{padding:96px 0;}
+  h1,h2,h3,h4{font-family:var(--font-serif); font-weight:500; margin:0; color:var(--text);}
+  p{margin:0; color:var(--text-soft);}
+
+  /* ---------- Nav ---------- */
+  header.site{
+    position:sticky; top:0; z-index:50;
+    background:rgba(249,248,246,0.88);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{
+    max-width:1180px; margin:0 auto; padding:0 40px;
+    height:82px; display:flex; align-items:center; justify-content:space-between;
+  }
+  .brand{display:flex; align-items:center; gap:13px;}
+  .mark{
+    width:40px; height:40px; border-radius:11px;
+    background:var(--forest);
+    display:flex; align-items:center; justify-content:center;
+    color:var(--alabaster); font-family:var(--font-serif); font-size:19px;
+    flex-shrink:0;
+  }
+  .brand-name{font-family:var(--font-serif); font-size:19px; font-weight:500; line-height:1.15;}
+  .brand-name small{display:block; font-family:var(--font-sans); font-weight:600; font-size:10.5px; color:var(--text-soft); letter-spacing:.3px; margin-top:1px;}
+  nav.links{display:flex; gap:36px; font-size:14px; font-weight:600; color:var(--text-soft);}
+  nav.links a:hover{color:var(--forest);}
+  .nav-cta{display:flex; align-items:center; gap:18px;}
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:11px 22px; border-radius:10px;
+    font-weight:700; font-size:13.5px; cursor:pointer; border:none;
+    font-family:var(--font-sans);
+  }
+  .btn-primary{background:var(--forest); color:var(--alabaster);}
+  .btn-ghost{background:transparent; border:1.5px solid var(--line); color:var(--text);}
+
+  /* ---------- Hero ---------- */
+  .hero{
+    padding:88px 0 70px;
+    display:grid; grid-template-columns:1fr 460px; gap:64px; align-items:center;
+  }
+  .eyebrow{
+    font-family:var(--font-serif); font-style:italic; font-size:18px;
+    color:var(--forest); margin:0 0 18px;
+  }
+  h1.hero-title{font-size:52px; line-height:1.06; letter-spacing:-.5px; margin-bottom:22px;}
+  .hero-title em{font-style:italic; color:var(--terracotta);}
+  .hero-sub{font-size:16.5px; line-height:1.65; max-width:46ch; margin-bottom:34px;}
+  .hero-actions{display:flex; gap:14px; margin-bottom:38px;}
+  .hero-stats{display:flex; gap:36px; padding-top:28px; border-top:1px solid var(--line);}
+  .hero-stats .stat b{display:block; font-family:var(--font-serif); font-size:26px; color:var(--forest); font-weight:500;}
+  .hero-stats .stat span{font-size:12px; color:var(--text-soft); font-weight:600;}
+
+  .hero-visual{
+    background:var(--surface); border:1px solid var(--line); border-radius:24px;
+    box-shadow:var(--shadow); padding:22px; position:relative;
+  }
+  .hv-head{display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;}
+  .hv-head .lbl{font-size:12px; font-weight:800; color:var(--text-soft);}
+  .hv-head .live{display:flex; align-items:center; gap:6px; font-size:11px; font-weight:700; color:var(--crimson);}
+  .live-dot{width:7px; height:7px; border-radius:50%; background:var(--crimson); animation:pulse 1.8s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.35;}}
+  .map-card{
+    border-radius:16px; overflow:hidden; position:relative; height:230px;
+    background:linear-gradient(160deg,#DCE6D5,#C9D9C0); margin-bottom:16px;
+  }
+  .pin{position:absolute; width:13px; height:13px; border-radius:50%; border:2.5px solid #fff; box-shadow:0 2px 6px rgba(0,0,0,.3);}
+  .pin.low{background:var(--emerald);} .pin.mod{background:var(--amber);} .pin.high{background:var(--crimson);}
+  .heat{position:absolute; width:64px; height:64px; border-radius:50%; background:radial-gradient(circle, rgba(181,69,62,.45), transparent 70%); animation:swell 2.6s ease-in-out infinite;}
+  @keyframes swell{0%,100%{transform:scale(1); opacity:.8;} 50%{transform:scale(1.3); opacity:.35;}}
+  .map-legend{position:absolute; bottom:10px; left:10px; display:flex; gap:10px; background:rgba(255,255,255,.88); padding:6px 10px; border-radius:99px; font-size:10px; font-weight:700; color:#3a3f33;}
+  .map-legend span{display:flex; align-items:center; gap:4px;}
+  .legend-dot{width:7px; height:7px; border-radius:50%;}
+  .hv-list{display:flex; flex-direction:column; gap:9px;}
+  .hv-row{display:flex; justify-content:space-between; align-items:center; font-size:12.5px; font-weight:600; padding:8px 4px;}
+  .hv-row .place{display:flex; align-items:center; gap:8px;}
+  .status-dot{width:8px; height:8px; border-radius:50%; flex-shrink:0;}
+  .hv-row .load{font-size:11px; font-weight:700; color:var(--text-soft);}
+
+  /* ---------- Section headers ---------- */
+  .section-head{max-width:640px; margin-bottom:48px;}
+  .section-head.center{margin-left:auto; margin-right:auto; text-align:center;}
+  .section-head h2{font-size:36px; margin-bottom:14px;}
+  .section-head p{font-size:15.5px; line-height:1.65;}
+
+  /* ---------- How it works ---------- */
+  .how{background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .how-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px;}
+  .how-card{background:var(--surface); border:1px solid var(--line); border-radius:20px; padding:30px;}
+  .how-card .idx{font-family:var(--font-serif); font-style:italic; font-size:15px; color:var(--terracotta); margin-bottom:16px;}
+  .how-card h3{font-size:19px; margin-bottom:10px;}
+  .how-card p{font-size:13.5px; line-height:1.6;}
+
+  /* ---------- Discover / Destinations ---------- */
+  .sort-row{display:flex; gap:10px; margin-bottom:34px; flex-wrap:wrap;}
+  .chip{
+    padding:9px 16px; border-radius:99px; border:1px solid var(--line);
+    background:var(--surface); font-size:13px; font-weight:700; color:var(--text-soft);
+  }
+  .chip.active{background:var(--forest); border-color:var(--forest); color:#fff;}
+
+  .dest-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .dest-card{
+    background:var(--surface); border:1px solid var(--line); border-radius:20px;
+    overflow:hidden; transition:transform .18s, box-shadow .18s;
+  }
+  .dest-card:hover{transform:translateY(-4px); box-shadow:var(--shadow);}
+  .dest-thumb{
+    height:150px; display:flex; align-items:flex-end; padding:14px;
+    color:#fff; position:relative; overflow:hidden;
+  }
+  .dest-thumb::after{content:''; position:absolute; inset:0; background:linear-gradient(180deg, transparent 40%, rgba(0,0,0,.55));}
+  .dest-thumb .status-dot{position:relative; z-index:2;}
+  .dest-thumb .load-badge{
+    position:relative; z-index:2; margin-left:auto;
+    font-size:10.5px; font-weight:800; background:rgba(255,255,255,.92); color:var(--ink);
+    padding:4px 9px; border-radius:99px; display:flex; align-items:center; gap:5px;
+  }
+  .dest-body{padding:18px;}
+  .dest-body .name{font-family:var(--font-serif); font-size:18px; margin-bottom:3px; font-weight:500;}
+  .dest-body .region{font-size:12px; color:var(--text-soft); margin-bottom:12px;}
+  .tag-row{display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px;}
+  .tag{font-size:10.5px; font-weight:700; padding:4px 9px; border-radius:99px; background:var(--surface-2); color:var(--text-soft);}
+  .redis-note{font-size:11.5px; color:var(--terracotta-deep); font-weight:700; display:flex; align-items:center; gap:6px;}
+
+  /* thumb color variants */
+  .thumb-1{background:linear-gradient(135deg,#1E3F20,#0E2010);}
+  .thumb-2{background:linear-gradient(135deg,#2F5A34,#123018);}
+  .thumb-3{background:linear-gradient(135deg,#B85431,#5C2A16);}
+  .thumb-4{background:linear-gradient(135deg,#3F5F5A,#152624);}
+  .thumb-5{background:linear-gradient(135deg,#5A4A2F,#2A2013);}
+  .thumb-6{background:linear-gradient(135deg,#274A3F,#0F211B);}
+
+  /* ---------- Spotlight / detail ---------- */
+  .spotlight{background:var(--forest); color:var(--alabaster);}
+  .spotlight .section-head p, .spotlight p{color:#CBE0CC;}
+  .spotlight .section-head h2, .spotlight h2, .spotlight h3{color:var(--alabaster);}
+  .spot-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; align-items:center;}
+  .spot-card{
+    background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14);
+    border-radius:22px; padding:28px;
+  }
+  .spot-top{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px;}
+  .spot-top .figure{font-family:var(--font-serif); font-size:30px;}
+  .spot-top .cap-label{font-size:11.5px; color:#B7CDB8; font-weight:700;}
+  .capacity-bar{height:9px; border-radius:99px; background:rgba(255,255,255,.16); overflow:hidden; margin-bottom:22px;}
+  .capacity-fill{height:100%; border-radius:99px; background:var(--amber); width:91%;}
+  .chart-row{display:flex; align-items:flex-end; gap:8px; height:90px; margin-bottom:8px;}
+  .chart-row .bar{flex:1; border-radius:5px 5px 0 0; background:rgba(255,255,255,.18);}
+  .chart-row .bar.peak{background:var(--terracotta);}
+  .chart-labels{display:flex; justify-content:space-between; font-size:10px; color:#9FBBA0; margin-bottom:22px;}
+  .redis-banner{
+    display:flex; gap:14px; padding:16px; border-radius:16px;
+    background:rgba(217,107,67,.14); border:1px solid rgba(217,107,67,.4);
+  }
+  .redis-banner p{margin:0 0 10px; font-size:13px; line-height:1.55; color:#F3E5DD;}
+  .alt-chip-row{display:flex; gap:8px; flex-wrap:wrap;}
+  .alt-chip{font-size:11.5px; font-weight:700; background:rgba(255,255,255,.1); border:1px solid rgba(255,255,255,.25); padding:6px 12px; border-radius:99px; color:#fff;}
+  .spot-list{margin-top:20px;}
+  .spot-row{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid rgba(255,255,255,.12); font-size:13.5px; font-weight:600;}
+  .spot-row .place{display:flex; align-items:center; gap:10px;}
+
+  /* ---------- Channels ---------- */
+  .multi-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px;}
+  .mchip { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px; box-shadow: var(--shadow); }
+  .mchip h4{font-size:17px; font-weight:500; margin:16px 0 6px;}
+  .mchip p{font-size:13px; color:var(--text-soft); line-height:1.55; margin:0 0 18px;}
+  .mock-frame{border-radius:12px; overflow:hidden; border:1px solid var(--line);}
+  .ch-icon{width:38px; height:38px; border-radius:11px; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-family:var(--font-serif); font-size:16px;}
+
+  .widget-mock{padding:16px; background:var(--surface-2);}
+  .widget-mock .wtitle{font-size:10px; font-weight:800; color:var(--text-soft); margin-bottom:10px;}
+  .widget-step{display:flex; align-items:center; gap:9px; padding:8px 0; font-size:12px; font-weight:600;}
+  .widget-step .n{width:19px; height:19px; border-radius:50%; background:var(--forest); color:#fff; font-size:9.5px; display:flex; align-items:center; justify-content:center; flex-shrink:0;}
+
+  .qr-mock{background:var(--charcoal); color:#fff; padding:22px; text-align:center;}
+  .qr-mock .pin-big{font-family:var(--font-serif); font-size:15px; margin:12px 0 4px;}
+  .qr-mock .dist{font-size:11.5px; color:#B7B7B0;}
+  .qr-grid{width:66px; height:66px; margin:0 auto;
+    background:repeating-linear-gradient(0deg,#fff 0 4px, transparent 4px 8px),
+      repeating-linear-gradient(90deg,#fff 0 4px, transparent 4px 8px);
+    background-blend-mode:screen; border-radius:6px; opacity:.9;}
+
+  .bot-mock{padding:16px; background:var(--surface-2);}
+  .bubble{max-width:82%; padding:9px 13px; border-radius:14px; font-size:12px; margin-bottom:9px; line-height:1.45;}
+  .bubble.them{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px;}
+  .bubble.us{background:var(--terracotta); color:#fff; margin-left:auto; border-bottom-right-radius:4px;}
+
+  /* ---------- Impact strip ---------- */
+  .impact{background:var(--surface-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .impact-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:32px; text-align:center;}
+  .impact-grid b{display:block; font-family:var(--font-serif); font-size:38px; color:var(--forest); font-weight:500; margin-bottom:8px;}
+  .impact-grid span{font-size:12.5px; color:var(--text-soft); font-weight:600;}
+
+  /* ---------- CTA band ---------- */
+  .cta-band{
+    background:var(--terracotta); border-radius:28px; padding:64px 60px;
+    display:flex; justify-content:space-between; align-items:center; gap:40px;
+    color:#fff;
+  }
+  .cta-band h2{color:#fff; font-size:32px; max-width:480px;}
+  .cta-band .btn-primary{background:var(--forest);}
+  .cta-band .btn-ghost{border-color:rgba(255,255,255,.5); color:#fff;}
+
+  /* ---------- Footer ---------- */
+  footer.site{border-top:1px solid var(--line); padding:56px 0 40px;}
+  .foot-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr 1fr; gap:40px; margin-bottom:40px;}
+  .foot-brand p{font-size:13px; margin-top:14px; max-width:32ch; line-height:1.6;}
+  .foot-col h5{font-size:12px; font-weight:800; color:var(--text-soft); margin-bottom:14px;}
+  .foot-col a{display:block; font-size:13.5px; color:var(--text); margin-bottom:10px;}
+  .foot-bottom{display:flex; justify-content:space-between; padding-top:24px; border-top:1px solid var(--line); font-size:12px; color:var(--text-soft);}
+
+  @media (max-width:1020px){
+    .hero{grid-template-columns:1fr;}
+    .how-grid, .dest-grid, .multi-grid{grid-template-columns:1fr 1fr;}
+    .spot-grid{grid-template-columns:1fr;}
+    .impact-grid{grid-template-columns:1fr 1fr;}
+    .foot-grid{grid-template-columns:1fr 1fr;}
+    nav.links{display:none;}
+  }
+  @media (max-width:640px){
+    .wrap{padding:0 20px;}
+    .nav{padding:0 20px;}
+    .how-grid, .dest-grid, .multi-grid, .impact-grid, .foot-grid{grid-template-columns:1fr;}
+    h1.hero-title{font-size:38px;}
+    .cta-band{flex-direction:column; text-align:center; padding:44px 28px;}
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="nav">
+    <div class="brand">
+      <div class="mark">R2</div>
+      <div class="brand-name">Roots2Routes<small>TOURISM LOAD BALANCING</small></div>
+    </div>
+    <nav class="links">
+      <a href="#how">How it works</a>
+      <a href="#discover">Destinations</a>
+      <a href="#spotlight">Live capacity</a>
+      <a href="#channels">Channels</a>
+      <a href="#impact">Impact</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#cg-map" class="btn btn-ghost">View live map</a>
+      <a href="#channels" class="btn btn-primary">Get the app</a>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap" style="display:grid; grid-template-columns:1fr 460px; gap:64px; align-items:center;">
+    <div>
+      <p class="eyebrow">Chhattisgarh, spread wide</p>
+      <h1 class="hero-title">Send every traveller<br>to their <em>right</em> Chhattisgarh.</h1>
+      <p class="hero-sub">Roots2Routes reads real-time crowd, weather and capacity data across Chhattisgarh's falls, forests and heritage sites — then nudges visitors toward the destination that's ready for them, easing pressure on the state's most-loved spots.</p>
+      <div class="hero-actions">
+        <a href="#discover" class="btn btn-primary">Explore live destinations</a>
+        <a href="#how" class="btn btn-ghost">See how it works</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat"><b>38</b><span>DESTINATIONS TRACKED</span></div>
+        <div class="stat"><b>12</b><span>DISTRICTS COVERED</span></div>
+        <div class="stat"><b>4.2L+</b><span>TRAVELLERS ROUTED / YR</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hv-head">
+        <span class="lbl">LIVE CROWD MAP</span>
+        <span class="live"><span class="live-dot"></span>LIVE</span>
+      </div>
+      <div class="map-card">
+        <div id="cg-map" style="height: 280px; width: 100%; border-radius: 12px; background: #e5e7eb; z-index: 1;"></div>
+        <div class="map-legend">
+          <span><span class="legend-dot" style="background:var(--emerald);"></span>Low</span>
+          <span><span class="legend-dot" style="background:var(--amber);"></span>Moderate</span>
+          <span><span class="legend-dot" style="background:var(--crimson);"></span>High</span>
+        </div>
+      </div>
+      <div class="hv-list">
+        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--crimson);"></span>Chitrakote Falls</span><span class="load">92% capacity</span></div>
+        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--amber);"></span>Kanger Valley N.P.</span><span class="load">64% capacity</span></div>
+        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Tirathgarh Falls</span><span class="load">31% capacity</span></div>
+        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Mainpat</span><span class="load">22% capacity</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">The problem, and the fix</p>
+      <h2>Chhattisgarh has dozens of stunning sites.<br>Most visitors only see three.</h2>
+      <p>Chitrakote, Kanger Valley and Bastar's temple circuit absorb the bulk of footfall, while equally rewarding places sit quiet. Roots2Routes closes that gap in three steps.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="idx">i.</div>
+        <h3>Tell us what you're after</h3>
+        <p>Waterfalls, wildlife, tribal culture, temples or offbeat trails — a traveller picks a mood and a travel radius, not a fixed itinerary.</p>
+      </div>
+      <div class="how-card">
+        <div class="idx">ii.</div>
+        <h3>We read live conditions</h3>
+        <p>Footfall counters, park permits, weather and road status feed a capacity score for every tracked destination, updated through the day.</p>
+      </div>
+      <div class="how-card">
+        <div class="idx">iii.</div>
+        <h3>We route, not just recommend</h3>
+        <p>When a favourite site nears capacity, we surface a genuinely comparable alternative nearby — same mood, shorter queue, better experience.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="discover">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Discover</p>
+      <h2>Destinations across Chhattisgarh</h2>
+      <p>Every listing carries a live capacity read, so travellers can choose with the same information our routing engine uses.</p>
+    </div>
+
+    <div class="sort-row">
+      <span class="chip active">All</span>
+      <span class="chip">Waterfalls</span>
+      <span class="chip">Wildlife &amp; forests</span>
+      <span class="chip">Temples &amp; heritage</span>
+      <span class="chip">Caves</span>
+      <span class="chip">Hill stations</span>
+    </div>
+
+    <div class="dest-grid">
+      <div class="dest-card">
+        <div class="dest-thumb thumb-1">
+          <span class="status-dot" style="background:var(--crimson);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--crimson); width:6px; height:6px;"></span>92% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Chitrakote Falls</div>
+          <div class="region">Bastar district · "Niagara of India"</div>
+          <div class="tag-row"><span class="tag">Waterfall</span><span class="tag">Monsoon peak</span></div>
+          <div class="redis-note">↳ Try Tirathgarh Falls instead</div>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-thumb thumb-2">
+          <span class="status-dot" style="background:var(--emerald);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>31% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Tirathgarh Falls</div>
+          <div class="region">Kanger Valley N.P., Bastar</div>
+          <div class="tag-row"><span class="tag">Waterfall</span><span class="tag">Easy access</span></div>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-thumb thumb-3">
+          <span class="status-dot" style="background:var(--amber);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--amber); width:6px; height:6px;"></span>64% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Kanger Valley National Park</div>
+          <div class="region">Bastar district</div>
+          <div class="tag-row"><span class="tag">Wildlife</span><span class="tag">Rainforest</span></div>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-thumb thumb-4">
+          <span class="status-dot" style="background:var(--emerald);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>18% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Kutumsar Caves</div>
+          <div class="region">Kanger Valley, Bastar</div>
+          <div class="tag-row"><span class="tag">Caves</span><span class="tag">Limestone</span></div>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-thumb thumb-5">
+          <span class="status-dot" style="background:var(--amber);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--amber); width:6px; height:6px;"></span>58% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Bhoramdeo Temple</div>
+          <div class="region">Kabirdham district · 11th century</div>
+          <div class="tag-row"><span class="tag">Heritage</span><span class="tag">Temple</span></div>
+        </div>
+      </div>
+
+      <div class="dest-card">
+        <div class="dest-thumb thumb-6">
+          <span class="status-dot" style="background:var(--emerald);"></span>
+          <span class="load-badge"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>24% full</span>
+        </div>
+        <div class="dest-body">
+          <div class="name">Mainpat</div>
+          <div class="region">Surguja district · "Mini Tibet"</div>
+          <div class="tag-row"><span class="tag">Hill station</span><span class="tag">Tibetan culture</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="spotlight" id="spotlight">
+  <div class="wrap">
+    <div class="spot-grid">
+      <div>
+        <p class="eyebrow" style="color:#9FD9A8;">Live capacity, one site</p>
+        <h2 style="font-size:34px; margin-bottom:16px;">Chitrakote Falls is at <span id="hero-pct-title">92</span>% capacity</h2>
+        <p style="font-size:15px; line-height:1.65; margin-bottom:24px;">Peak monsoon flow has pushed queue times past 40 minutes at the main viewpoint. Roots2Routes is surfacing nearby alternatives to every visitor searching Chitrakote right now, and holding this listing's ranking steady rather than promoting it further.</p>
+        <div class="redis-banner">
+          <div>
+            <p>Suggested to travellers instead — same monsoon-waterfall mood, under 20% capacity:</p>
+            <div class="alt-chip-row">
+              <span class="alt-chip">Tirathgarh Falls · 45 min away</span>
+              <span class="alt-chip">Amrit Dhara Falls · 2 hr away</span>
+              <span class="alt-chip">Chitradhara Falls · 1.5 hr away</span>
+            </div>
+          </div>
+        </div>
+        <div class="spot-list">
+          <div class="spot-row"><span class="place">Best time to visit today</span><span>Before 8:30 AM</span></div>
+          <div class="spot-row"><span class="place">Average queue, main viewpoint</span><span><span id="hero-queue">38</span> min</span></div>
+          <div class="spot-row"><span class="place">Parking availability</span><span>Limited</span></div>
+        </div>
+      </div>
+
+      <div class="spot-card">
+        <div class="spot-top">
+          <span class="figure"><span id="hero-pct-large">92</span>%</span>
+          <span class="cap-label">OF DAILY VISITOR CAP</span>
+        </div>
+        <div class="capacity-bar"><div class="capacity-fill" id="hero-progress-bar"></div></div>
+        <div class="chart-row">
+          <div class="bar" style="height:22%;"></div>
+          <div class="bar" style="height:30%;"></div>
+          <div class="bar" style="height:44%;"></div>
+          <div class="bar" style="height:68%;"></div>
+          <div class="bar peak" style="height:92%;"></div>
+          <div class="bar" style="height:75%;"></div>
+          <div class="bar" style="height:52%;"></div>
+        </div>
+        <div class="chart-labels">
+          <span>6 AM</span><span>8 AM</span><span>10 AM</span><span>12 PM</span><span>2 PM</span><span>4 PM</span><span>6 PM</span>
+        </div>
+        <p style="font-size:12.5px; color:#B7CDB8; line-height:1.6;">Hourly footfall, today — sourced from ticketing gates and district tourism board counts.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="channels">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Reach travellers where they are</p>
+      <h2>One routing engine, three channels</h2>
+      <p>The same live capacity data reaches travellers through the app, on-site signage, and a WhatsApp assistant used by homestay hosts across Bastar and Surguja.</p>
+    </div>
+    <div class="multi-grid">
+      <div class="mchip">
+        <div class="ch-icon">◧</div>
+        <h4>In-app trip widget</h4>
+        <p>A step-by-step planner that swaps in a lower-capacity destination the moment a favourite fills up.</p>
+        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-top: 12px;">
+    <label style="font-size: 0.75rem; font-weight: bold; color: #334155; display: block; margin-bottom: 6px; letter-spacing: 0.05em;">PLAN YOUR DAY</label>
+    <select id="trip-category" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; outline: none; background: #ffffff; margin-bottom: 10px;">
+        <option value="Waterfalls">Waterfalls (Monsoon Mood)</option>
+        <option value="Wildlife">Wildlife & Forests</option>
+        <option value="Temples">Temples & Heritage</option>
+        <option value="Caves">Caves & Adventure</option>
+    </select>
+
+    <button onclick="getSmartTripRecommendation()" 
+            style="width: 100%; background: #1e3f20; color: white; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px;">
+        Find Least Crowded Route 🚀
+    </button>
+
+    <div id="trip-result" style="background: #ffffff; border-radius: 8px; padding: 10px; font-size: 0.8rem; color: #334155; border-left: 4px solid #10b981;">
+        <i>Select a mood above to generate a real-time smart route.</i>
+    </div>
+</div>
+      </div>
+      <div class="mchip">
+        <div class="ch-icon">▦</div>
+        <h4>On-site QR signage</h4>
+        <p>Boards at Chitrakote and Kanger Valley entry points point overflow visitors to a nearby low-crowd option in one scan.</p>
+        <div class="mock-frame">
+          <div class="qr-mock">
+            <div class="qr-grid"></div>
+            <div class="pin-big">Tirathgarh Falls</div>
+            <div class="dist">45 min · currently quiet</div>
+          </div>
+        </div>
+      </div>
+      <div class="mchip">
+        <div class="ch-icon">◔</div>
+        <h4>WhatsApp assistant</h4>
+        <p>Homestay hosts and local guides query live capacity for guests directly, in Hindi or English, without opening the app.</p>
+        <!-- Interactive Chat Widget -->
+<div class="mock-frame" style="display: flex; flex-direction: column; height: 250px; background: #efeae2; border-radius: 12px; padding: 12px; margin-top: 15px;">
+    
+    <!-- Chat History Window -->
+    <div id="chat-window" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
+        <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.08); font-size: 0.9rem; color: #333;">
+            Namaste! Ask me about live crowd levels in Bastar & Surguja.
+        </div>
+    </div>
+
+    <!-- Input Box & Send Button -->
+    <div style="display: flex; gap: 8px;">
+        <input id="chat-input" type="text" placeholder="e.g. Is Chitrakote crowded?" 
+               style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; outline: none;"
+               onkeydown="if(event.key === 'Enter') sendWhatsAppMessage()">
+        <button onclick="sendWhatsAppMessage()" 
+                style="background: #15803d; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
+            Send
+        </button>
+    </div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="impact" id="impact">
+  <div class="wrap">
+    <div class="section-head center">
+      <p class="eyebrow">Since launch, statewide</p>
+      <h2>Spreading the load, not just the message</h2>
+    </div>
+    <div class="impact-grid">
+      <div><b>27%</b><span>DROP IN PEAK-DAY CROWDING AT CHITRAKOTE</span></div>
+      <div><b>4.2L+</b><span>TRAVELLERS ROUTED TO ALTERNATE SITES</span></div>
+      <div><b>19</b><span>UNDER-VISITED SITES NOW ON THE MAP</span></div>
+      <div><b>96</b><span>HOMESTAYS ONBOARDED ON WHATSAPP</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="cta-band">
+      <h2>Help Chhattisgarh's quieter corners get their turn.</h2>
+      <div style="display:flex; gap:14px; flex-shrink:0;">
+        <a href="#channels" class="btn btn-primary">Get the app</a>
+        <a href="#cg-map" class="btn btn-ghost">View live map</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <div class="mark">R2</div>
+          <div class="brand-name">Roots2Routes<small>TOURISM LOAD BALANCING</small></div>
+        </div>
+        <p>A tourism load-balancing tool built for Chhattisgarh — routing travellers to the site that's ready for them, so the state's quieter destinations get seen too.</p>
+      </div>
+      <div class="foot-col">
+        <h5>PLATFORM</h5>
+        <a href="#how">How it works</a>
+        <a href="#discover">Destinations</a>
+        <a href="#spotlight">Live capacity</a>
+        <a href="#channels">Channels</a>
+      </div>
+      <div class="foot-col">
+        <h5>DESTINATIONS</h5>
+        <a href="#discover">Chitrakote Falls</a>
+        <a href="#discover">Kanger Valley N.P.</a>
+        <a href="#discover">Bhoramdeo Temple</a>
+        <a href="#discover">Mainpat</a>
+      </div>
+      <div class="foot-col">
+        <h5>PARTNERS</h5>
+        <a href="#">Chhattisgarh Tourism Board</a>
+        <a href="#">District administrations</a>
+        <a href="#">Homestay network</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Roots2Routes. Built for Chhattisgarh Tourism.</span>
+      <span>Data refreshed every 15 minutes</span>
+    </div>
+  </div>
+</footer>
+<script>
+    async function sendWhatsAppMessage() {
+        const input = document.getElementById('chat-input');
+        const window = document.getElementById('chat-window');
+        const msg = input.value.trim();
+        if (!msg) return;
+
+        // Append user message bubble
+        window.innerHTML += `
+            <div style="align-self: flex-end; background: #dcf8c6; padding: 8px 12px; border-radius: 8px 8px 2px 8px; max-width: 85%; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+                ${msg}
+            </div>
+        `;
+        input.value = '';
+        window.scrollTop = window.scrollHeight;
+
+        try {
+            const res = await fetch('http://192.168.29.141:5000/api/v1/whatsapp/webhook', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: msg })
+            });
+            const data = await res.json();
+
+            // Append bot response bubble
+            window.innerHTML += `
+                <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); white-space: pre-line;">
+                    ${data.reply}
+                </div>
+            `;
+        } catch (e) {
+            window.innerHTML += `
+                <div style="align-self: flex-start; background: #fee2e2; color: #b91c1c; padding: 8px 12px; border-radius: 8px; max-width: 85%; margin-bottom: 8px;">
+                    Bot offline. Ensure backend is running.
+                </div>
+            `;
+        }
+        window.scrollTop = window.scrollHeight;
+    }
+</script>
+
+
+
+<script>
+
+   // 1. Initialize the Chhattisgarh Map
+const map = L.map('cg-map').setView([21.2787, 81.8661], 6);
+L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+let currentMarkers = [];
+const statusColors = { 'low': '#10b981', 'mod': '#f59e0b', 'high': '#ef4444' };
+
+// 2. Fetch Live Capacity & Update UI + Map + Grid Cards
+async function fetchLiveCapacity() {
+    try {
+        const response = await fetch('http://192.168.29.141:5000/api/v1/destinations/live');
+        const { data } = await response.json();
+
+        // Clear old markers before redrawing
+        currentMarkers.forEach(marker => map.removeLayer(marker));
+        currentMarkers = [];
+
+        data.forEach(dest => {
+            // Update the Discovery Grid Cards
+            const cards = document.querySelectorAll('.mchip');
+            cards.forEach(card => {
+                if (card.textContent.includes(dest.name)) {
+                    const badge = card.querySelector('.load');
+                    if (badge) badge.innerText = `${dest.percentage}% full`;
+                }
+            });
+
+            // Update the text UI (List below map)
+            const elements = Array.from(document.querySelectorAll('.dest-body, .hv-row'));
+            elements.forEach(el => {
+                if (el.textContent.includes(dest.name)) {
+                    const badge = el.parentElement.querySelector('.load');
+                    const dot = el.parentElement.querySelector('.status-dot, .live-dot, .legend-dot');
+                    if (badge) badge.innerText = `${dest.percentage}% capacity`;
+                    if (dot) dot.style.background = statusColors[dest.status] || '#ccc';
+                }
+            });
+
+            // Plot live markers on the map
+            if (dest.lat && dest.lon) {
+                const marker = L.circleMarker([parseFloat(dest.lat), parseFloat(dest.lon)], {
+                    radius: 8,
+                    fillColor: statusColors[dest.status] || '#ccc',
+                    color: '#ffffff',
+                    weight: 2,
+                    fillOpacity: 1
+                }).addTo(map);
+                
+                marker.bindPopup(`<b>${dest.name}</b><br>${dest.percentage}% capacity`);
+                currentMarkers.push(marker);
+            }
+
+            // Update the Deep-Dive Chitrakote Section
+            if (dest.name === 'Chitrakote Falls') {
+                const titlePct = document.getElementById('hero-pct-title');
+                const queueStat = document.getElementById('hero-queue');
+
+                if (titlePct) titlePct.innerText = dest.percentage;
+                if (queueStat) queueStat.innerText = dest.queue_time_mins;
+            }
+        });
+    } catch (err) {
+        console.error('Backend offline:', err);
+    }
+}
+
+// Initial call & auto-refresh every 60 seconds
+fetchLiveCapacity();
+setInterval(fetchLiveCapacity, 60000);
+
+// 3. WhatsApp Chatbot Logic
+async function sendWhatsAppMessage() {
+    const input = document.getElementById('chat-input');
+    const window = document.getElementById('chat-window');
+    const msg = input.value.trim();
+    if (!msg) return;
+
+    window.innerHTML += `
+        <div style="align-self: flex-end; background: #dcf8c6; padding: 8px 12px; border-radius: 8px 8px 2px 8px; max-width: 85%; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.08);">
+            ${msg}
+        </div>
+    `;
+    input.value = '';
+    window.scrollTop = window.scrollHeight;
+
+    try {
+        const res = await fetch('http://192.168.29.141:5000/api/v1/whatsapp/webhook', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: msg })
+        });
+        const data = await res.json();
+
+        window.innerHTML += `
+            <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; margin-bottom: 8px; box-shadow: 0 1px 2px rgba(0,0,0,0.08); white-space: pre-line;">
+                ${data.reply}
+            </div>
+        `;
+    } catch (e) {
+        window.innerHTML += `
+            <div style="align-self: flex-start; background: #fee2e2; color: #b91c1c; padding: 8px 12px; border-radius: 8px; max-width: 85%; margin-bottom: 8px;">
+                Bot offline. Ensure backend is running.
+            </div>
+        `;
+    }
+    window.scrollTop = window.scrollHeight;
+}
+
+// 4. In-App Trip Widget Smart Rerouting Logic
+async function getSmartTripRecommendation() {
+    const category = document.getElementById('trip-category').value;
+    const resultBox = document.getElementById('trip-result');
+    
+    resultBox.innerHTML = `<i>Calculating live telemetry across Chhattisgarh...</i>`;
+
+    try {
+        const response = await fetch('http://192.168.29.141:5000/api/v1/routes/recommend', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ 
+                category: category, 
+                target_lat: 21.2787, 
+                target_lon: 81.8661,
+                max_radius_km: 300 
+            })
+        });
+        
+        const data = await response.json();
+
+        if (data && data.name) {
+            const statusColor = data.percentage > 80 ? '#ef4444' : (data.percentage > 50 ? '#f59e0b' : '#10b981');
+            resultBox.style.borderLeftColor = statusColor;
+            resultBox.innerHTML = `
+                <b>✨ Best Fit Found:</b><br>
+                📍 <b>${data.name}</b> (${data.district || 'Chhattisgarh'})${data.tag ? ' | ' + data.tag : ''}<br>
+                📊 Crowd: <span style="color: ${statusColor}; font-weight: bold;">${data.percentage}% capacity</span><br>
+                ⏳ Queue: ~${data.queue_time_mins || 15} mins
+            `;
+        } else {
+            resultBox.innerHTML = `<i>No alternative destinations found for this category right now. Try another category!</i>`;
+        }
+    } catch (err) {
+        console.error('Trip planner error:', err);
+        resultBox.style.borderLeftColor = '#ef4444';
+        resultBox.innerHTML = `<i>Error connecting to routing backend. Make sure server is running.</i>`;
+    }
+}
+
+</script>

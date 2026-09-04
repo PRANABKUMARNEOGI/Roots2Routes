@@ -82,8 +82,7 @@ app.post('/api/v1/routes/recommend', async (req, res) => {
 // Start the server and the background aggregator
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Roots2Routes backend running on port ${PORT}`);
-    startAggregator();
+    console.log(`Server running on port ${PORT}`);
 });
 
 // 3. POST WhatsApp Assistant Webhook (Handles Hindi & English Queries)

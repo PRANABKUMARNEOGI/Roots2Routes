@@ -401,21 +401,24 @@
       <p>Every listing carries a live capacity read, so travellers can choose with the same information our routing engine uses.</p>
     </div>
 
-    <div class="sort-row">
-      <span class="chip active">All</span>
-      <span class="chip">Waterfalls</span>
-      <span class="chip">Wildlife &amp; forests</span>
-      <span class="chip">Temples &amp; heritage</span>
-      <span class="chip">Caves</span>
-      <span class="chip">Hill stations</span>
-    </div>
+    <!-- PASTE YOUR FILTER CHIPS ROW HERE -->
+        <div class="sort-row">
+            <div class="chip active">All</div>
+            <div class="chip">Waterfalls</div>
+            <div class="chip">Wildlife & forests</div>
+            <div class="chip">Temples & heritage</div>
+            <div class="chip">Caves</div>
+            <div class="chip">Hill stations</div>
+        </div>
 
    <div class="dest-grid">
   <!-- 1. Chitrakote Falls -->
   <div class="dest-card">
     <div class="dest-thumb thumb-1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/chitrakote.jpg'); background-size: cover; background-position: center;">
-      <span class="status-dot" id="dot-chitrakote" style="background:var(--crimson);"></span>
-      <span class="load-badge" id="badge-chitrakote"><span class="status-dot" style="background:var(--amber); width:6px; height:6px;"></span>Live Capacity : 62%</span>
+      <span class="status-dot" id="dot-chitrakote" style="background:var(--emerald);"></span>
+      <span class="load-badge" id="badge-chitrakote"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Live Capacity : 42%</span>
+      <div class="dest-card" onclick="openDestinationModal('chitrakote')" style="cursor: pointer;">
+    </div>
     </div>
     <div class="dest-body">
       <div class="name">Chitrakote Falls</div>
@@ -518,7 +521,7 @@
 
       <div class="spot-card">
         <div class="spot-top">
-          <span class="figure"><span id="hero-pct-large">78</span>%</span>
+          <span class="figure"><span id="hero-pct-large">94</span>%</span>
           <span class="cap-label">OF DAILY VISITOR CAP</span>
         </div>
         <div class="capacity-bar"><div class="capacity-fill" id="hero-progress-bar"></div></div>
@@ -527,7 +530,7 @@
           <div class="bar" style="height:30%;"></div>
           <div class="bar" style="height:44%;"></div>
           <div class="bar" style="height:68%;"></div>
-          <div class="bar peak" style="height:78%;"></div>
+          <div class="bar peak" style="height:94%;"></div>
           <div class="bar" style="height:75%;"></div>
           <div class="bar" style="height:52%;"></div>
         </div>
@@ -916,5 +919,306 @@ async function fetchLiveCapacities() {
     }
 }
 
+// Destination geography and gallery data bank
+// Expanded data bank with history, cultural heritage, importance, and pictures
+const destinationDetails = {
+    "chitrakote": {
+        title: "Chitrakote Falls",
+        subtitle: "Bastar district · 'Niagara of India'",
+        image: "assests/chitrakote.jpg",
+        geography: "Formed by the horseshoe bend of the Indravati River, Chitrakote Falls drops from a height of about 29 meters. During the monsoon season, the river spans over 300 meters wide.",
+        history: "Historically revered for centuries by local tribal communities, the falls served as a natural landmark and crossing point along ancient trade routes through the forest.",
+        culturalHeritage: "Deeply intertwined with the mythology and folklore of the Bastar tribes, who celebrate local seasonal festivals near its banks.",
+        importance: "Acts as a primary ecotourism anchor for Chhattisgarh, driving sustainable local economies while serving as a key benchmark for regional river health.",
+        gallery: ["assests/chitrakote(1).jpg", "assests/chitrakote(2).jpg", "assests/chitrakote(3).jpg", "assests/chitrakote(4).jpg"] // Add more unique filenames here if available
+    },
+    "tirathgarh": {
+        title: "Tirathgarh Falls",
+        subtitle: "Bastar district · Kanger Valley National Park",
+        image: "assests/tirathgarh.jpg",
+        geography: "A multi-tiered block waterfall cascading down granite and sandstone formations on the Mugga River over 300 feet.",
+        history: "Protected within the dense biosphere of Kanger Valley, safeguarding rare endemic flora and fauna for generations.",
+        culturalHeritage: "Sacred groves surrounding the waterfall are protected by indigenous communities under traditional ecological knowledge.",
+        importance: "Serves as a crucial biodiversity corridor and an essential hydrological feature for the Kanger Valley ecosystem.",
+        gallery: ["assests/tirathgarh (1).jpg", "assests/tirathgarh (2).jpg", "assests/tirathgarh (3).jpg", "assests/tirathgarh (4).jpg"]
+    },
+    "kanger": {
+        title: "Kanger Valley National Park",
+        subtitle: "Bastar district · Rainforest & Wildlife",
+        image: "assests/kanger.jpg",
+        geography: "A dense deciduous and semi-evergreen reserve featuring subterranean limestone cave systems and winding river streams.",
+        history: "Notified as a national park in 1982 to protect its rich wilderness, ancient caves, and endangered wildlife.",
+        culturalHeritage: "Home to indigenous tribal settlements whose traditional lifestyle, arts, and forest-foraging practices define Bastar's living heritage.",
+        importance: "A vital ecological lung and wildlife sanctuary holding critical scientific, geological, and conservation value for central India.",
+        gallery: ["assests/kanger(1).jpg", "assests/kanger(2).jpg", "assests/kanger(3).jpg", "assests/kanger(4).jpg"]
+    },
+    "kutumsar": {
+        title: "Kutumsar Caves",
+        subtitle: "Kanger Valley, Bastar",
+        image: "assests/kutumsar.jpg",
+        geography: "Subterranean cave system featuring magnificent stalactite and stalagmite formations deep underground with zero natural light.",
+        history: "Discovered by local researchers and forest officials in the mid-20th century, revealing unique blind cave-dwelling aquatic species.",
+        culturalHeritage: "Connected to tribal folklore regarding subterranean spirits and deep earth guardianship.",
+        importance: "Of immense speleological and evolutionary importance due to its rare blind fauna and complex geological formations.",
+        gallery: ["assests/kutumsar(1).jpg", "assests/kutumsar(2).jpg", "assests/kutumsar(3).jpg", "assests/kutumsar(4).jpg"]
+    },
+    "bhoramdeo": {
+        title: "Bhoramdeo Temple",
+        subtitle: "Kabirdham district · 11th century",
+        image: "assests/bhoramdeo.jpg",
+        geography: "An architectural masterpiece built with intricately carved stone blocks nestled against scenic Maikal mountain hills.",
+        history: "Constructed between the 9th and 11th centuries during the Nagavanshi dynasty rule, dedicated to Lord Shiva.",
+        culturalHeritage: "Renowned as the 'Khajuraho of Chhattisgarh', displaying exquisite classical temple sculptures and historical iconography.",
+        importance: "A protected national monument holding priceless archaeological, historical, and architectural significance.",
+        gallery: ["assests/bhoramdeo(1).jpg", "assests/bhoramdeo(2).jpg", "assests/bhoramdeo(3).jpg", "assests/bhoramdeo(4).jpg"]
+    },
+    "mainpat": {
+        title: "Mainpat",
+        subtitle: "Surguja district · 'Mini Tibet'",
+        image: "assests/mainpat.jpg",
+        geography: "A picturesque tableland hill station characterized by rolling green meadows, waterfalls, and unique bouncing muddy turf.",
+        history: "Settled heavily by Tibetan refugees in the 1960s, transforming the plateau into a vibrant cultural enclave.",
+        culturalHeritage: "A unique multicultural blend of traditional tribal Chhattisgarh culture and Tibetan Buddhism, monasteries, and prayer flags.",
+        importance: "A major sustainable hill tourism destination representing cross-cultural harmony and high-altitude farming.",
+        gallery: ["assests/mainpat(1).jpg", "assests/mainpat(2).jpg", "assests/mainpat(3).jpg", "assests/mainpat(4).jpg"]
+    }
+};
+
+function openDestinationModal(key) {
+    const data = destinationDetails[key];
+    if (!data) return;
+
+    let modal = document.getElementById('destination-modal');
+    
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'destination-modal';
+        modal.style.cssText = "display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 1000; align-items: center; justify-content: center;";
+       modal.innerHTML = `
+            <div style="background: #fff; width: 90%; max-width: 750px; border-radius: 20px; padding: 30px; position: relative; max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.3);">
+                <button onclick="closeDestinationModal()" style="position: absolute; top: 20px; right: 20px; background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                <h2 id="modal-title" style="font-size: 28px; margin-bottom: 5px;"></h2>
+                <p id="modal-subtitle" style="color: #666; font-size: 14px; margin-bottom: 20px;"></p>
+                <div id="modal-img-container" style="width: 100%; height: 260px; border-radius: 12px; background-size: cover; background-position: center; margin-bottom: 20px;"></div>
+                
+                <h3 style="font-size: 18px; margin-bottom: 6px; color: #1e3f20;">Geography & Formation</h3>
+                <p id="modal-geography" style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 16px;"></p>
+
+                <h3 style="font-size: 18px; margin-bottom: 6px; color: #1e3f20;">History</h3>
+                <p id="modal-history" style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 16px;"></p>
+
+                <h3 style="font-size: 18px; margin-bottom: 6px; color: #1e3f20;">Cultural Heritage</h3>
+                <p id="modal-heritage" style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 16px;"></p>
+
+                <h3 style="font-size: 18px; margin-bottom: 6px; color: #1e3f20;">Importance</h3>
+                <p id="modal-importance" style="color: #444; font-size: 15px; line-height: 1.6; margin-bottom: 20px;"></p>
+
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: #1e3f20;">Photo Gallery</h3>
+                <div id="modal-gallery" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px;"></div>
+
+                <hr style="border: none; border-top: 1px solid #eee; margin-bottom: 20px;">
+                
+                <!-- Review Section -->
+                <h3 style="font-size: 18px; margin-bottom: 10px; color: #1e3f20;">Traveler Reviews</h3>
+                <form id="review-form" onsubmit="handleReviewSubmit(event, '${key}')" style="margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px;">
+                    <input type="text" id="reviewer-name" placeholder="Your Name" required style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px;">
+                    <select id="review-rating" style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px;">
+                        <option value="5">⭐⭐⭐⭐⭐ (5/5)</option>
+                        <option value="4">⭐⭐⭐⭐ (4/5)</option>
+                        <option value="3">⭐⭐⭐ (3/5)</option>
+                        <option value="2">⭐⭐ (2/5)</option>
+                        <option value="1">⭐ (1/5)</option>
+                    </select>
+                    <textarea id="review-comment" placeholder="Share your experience..." required rows="3" style="padding: 10px; border: 1px solid #ccc; border-radius: 8px; font-size: 14px; resize: vertical;"></textarea>
+                    <button type="submit" style="background: #1e3f20; color: white; border: none; padding: 10px; border-radius: 8px; cursor: pointer; font-weight: bold;">Post Review</button>
+                </form>
+                <div id="modal-reviews-list" style="display: flex; flex-direction: column; gap: 10px;"></div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+    }
+
+    document.getElementById('modal-title').innerText = data.title;
+    document.getElementById('modal-subtitle').innerText = data.subtitle;
+    document.getElementById('modal-img-container').style.backgroundImage = `url('${data.image}')`;
+    document.getElementById('modal-geography').innerText = data.geography;
+    document.getElementById('modal-history').innerText = data.history;
+    document.getElementById('modal-heritage').innerText = data.culturalHeritage;
+    document.getElementById('modal-importance').innerText = data.importance;
+
+    const galleryContainer = document.getElementById('modal-gallery');
+    galleryContainer.innerHTML = data.gallery.map(img => `
+        <div style="height: 85px; border-radius: 8px; background-image: url('${img}'); background-size: cover; background-position: center;"></div>
+    `).join('');
+
+    modal.style.display = 'flex';
+}
+
+function closeDestinationModal() {
+    const modal = document.getElementById('destination-modal');
+    if (modal) modal.style.display = 'none';
+}
+
+// Global click listener to automatically catch destination card clicks
+document.addEventListener("click", function(event) {
+    const card = event.target.closest(".dest-card");
+    if (!card) return;
+    
+    // Read card title text to match with destination keys
+    const titleText = card.querySelector(".dest-name, h3, h4")?.innerText.toLowerCase() || "";
+    
+    if (titleText.includes("chitrakote")) openDestinationModal('chitrakote');
+    else if (titleText.includes("tirathgarh")) openDestinationModal('tirathgarh');
+    else if (titleText.includes("kanger")) openDestinationModal('kanger');
+    else if (titleText.includes("kutumsar")) openDestinationModal('kutumsar');
+    else if (titleText.includes("bhoramdeo")) openDestinationModal('bhoramdeo');
+    else if (titleText.includes("mainpat")) openDestinationModal('mainpat');
+});
+
+// Global click listener using card text matching
+document.addEventListener("click", function(event) {
+    const card = event.target.closest(".dest-card");
+    if (!card) return;
+    
+    // Convert the entire card's text to lowercase for easy matching
+    const cardText = card.innerText.toLowerCase();
+    
+    if (cardText.includes("chitrakote")) {
+        openDestinationModal('chitrakote');
+    } else if (cardText.includes("tirathgarh")) {
+        openDestinationModal('tirathgarh');
+    } else if (cardText.includes("kutumsar")) {
+        openDestinationModal('kutumsar');
+    } else if (cardText.includes("kanger")) {
+        openDestinationModal('kanger');
+    } else if (cardText.includes("bhoramdeo")) {
+        openDestinationModal('bhoramdeo');
+    } else if (cardText.includes("mainpat")) {
+        openDestinationModal('mainpat');
+    }
+});
+
+// Filter functionality for destination category pills
+// Category filter logic using your .chip and .dest-card classes
+document.addEventListener("click", function(event) {
+    const chip = event.target.closest(".chip");
+    if (!chip) return;
+
+    // Remove active class from all chips, then add to clicked one
+    document.querySelectorAll(".chip").forEach(c => c.classList.remove("active"));
+    chip.classList.add("active");
+
+    const filterText = chip.innerText.trim().toLowerCase();
+
+    // Show/hide destination cards based on matching text
+    document.querySelectorAll(".dest-card").forEach(card => {
+        const cardText = card.innerText.toLowerCase();
+
+        if (filterText.includes("all")) {
+            card.style.display = "block";
+        } else if (filterText.includes("waterfall") && cardText.includes("waterfall")) {
+            card.style.display = "block";
+        } else if (filterText.includes("wildlife") && (cardText.includes("wildlife") || cardText.includes("national park") || cardText.includes("forest"))) {
+            card.style.display = "block";
+        } else if (filterText.includes("temple") && (cardText.includes("temple") || cardText.includes("heritage"))) {
+            card.style.display = "block";
+        } else if (filterText.includes("cave") && cardText.includes("cave")) {
+            card.style.display = "block";
+        } else if (filterText.includes("hill") && cardText.includes("hill")) {
+            card.style.display = "block";
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
+
+// Handle new review submission
+function handleReviewSubmit(event, key) {
+    event.preventDefault();
+    
+    const name = document.getElementById('reviewer-name').value;
+    const rating = document.getElementById('review-rating').value;
+    const comment = document.getElementById('review-comment').value;
+
+    if (!destinationDetails[key].reviews) {
+        destinationDetails[key].reviews = [];
+    }
+
+    destinationDetails[key].reviews.unshift({ name, rating, comment });
+
+    document.getElementById('reviewer-name').value = "";
+    document.getElementById('review-comment').value = "";
+
+    renderReviews(key);
+}
+
+// Render reviews inside the active modal
+function renderReviews(key) {
+    const reviewsContainer = document.getElementById('modal-reviews-list');
+    if (!reviewsContainer) return;
+    
+    const reviews = destinationDetails[key].reviews || [];
+
+    if (reviews.length === 0) {
+        reviewsContainer.innerHTML = `<p style="color: #666; font-size: 14px; font-style: italic;">No reviews yet. Be the first to share your experience!</p>`;
+        return;
+    }
+
+    reviewsContainer.innerHTML = reviews.map(r => `
+        <div style="background: #f9f9f9; padding: 12px; border-radius: 10px; border: 1px solid #eee;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="font-size: 14px; color: #333;">${r.name}</strong>
+                <span style="color: #f59e0b; font-size: 13px;">${'⭐'.repeat(r.rating)}</span>
+            </div>
+            <p style="font-size: 14px; color: #555; margin: 0; line-height: 1.4;">${r.comment}</p>
+        </div>
+    `).join('');
+}
+
+// Variable to track speech state
+let currentSpeech = null;
+
+function toggleAudioGuide(key) {
+    const data = destinationDetails[key];
+    const btn = document.getElementById('audio-play-btn');
+    if (!data) return;
+
+    // If speech is currently active, stop it
+    if (window.speechSynthesis.speaking) {
+        window.speechSynthesis.cancel();
+        if (btn) btn.innerText = "Play Audio";
+        return;
+    }
+
+    // Combine text to read aloud
+    const audioText = `${data.title}. ${data.geography} History: ${data.history} Cultural Heritage: ${data.culturalHeritage} Importance: ${data.importance}`;
+    
+    const utterance = new SpeechSynthesisUtterance(audioText);
+    utterance.rate = 0.95; // Natural speaking speed
+
+    utterance.onstart = function() {
+        if (btn) btn.innerText = "⏹ Stop Audio";
+    };
+
+    utterance.onend = function() {
+        if (btn) btn.innerText = "Play Audio";
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
+
+// Stop audio automatically if the modal is closed
+const originalCloseModal = window.closeDestinationModal || closeDestinationModal;
+window.closeDestinationModal = function() {
+    if (window.speechSynthesis) {
+        window.speechSynthesis.cancel();
+    }
+    const btn = document.getElementById('audio-play-btn');
+    if (btn) btn.innerText = "Play Audio";
+    
+    // Call original close function
+    const modal = document.getElementById('destination-modal');
+    if (modal) modal.style.display = 'none';
+};
 document.addEventListener("DOMContentLoaded", fetchLiveCapacities);
 </script>

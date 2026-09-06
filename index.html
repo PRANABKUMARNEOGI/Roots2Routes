@@ -314,27 +314,44 @@
       </div>
     </div>
 
-    <div class="hero-visual">
-      <div class="hv-head">
-        <span class="lbl">LIVE CROWD MAP</span>
-        <span class="live"><span class="live-dot"></span>LIVE</span>
-      </div>
-      <div class="map-card">
-        <div id="cg-map" style="height: 280px; width: 100%; border-radius: 12px; background: #e5e7eb; z-index: 1;"></div>
-        <div class="map-legend">
-          <span><span class="legend-dot" style="background:var(--emerald);"></span>Low</span>
-          <span><span class="legend-dot" style="background:var(--amber);"></span>Moderate</span>
-          <span><span class="legend-dot" style="background:var(--crimson);"></span>High</span>
+    <div class="hero-visual" style="display: grid; grid-template-columns: 380px 380px; gap: 20px; background: transparent; border: none; box-shadow: none; padding: 0; align-items: start;">
+    
+    <div style="background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column;">
+        <div class="hv-head" style="margin-bottom: 10px;">
+            <span class="lbl" style="font-size: 11px;">LIVE CROWD MAP</span>
+            <span class="live"><span class="live-dot"></span>LIVE</span>
         </div>
-      </div>
-      <div class="hv-list">
-        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--crimson);"></span>Chitrakote Falls</span><span class="load">92% capacity</span></div>
-        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--amber);"></span>Kanger Valley N.P.</span><span class="load">64% capacity</span></div>
-        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Tirathgarh Falls</span><span class="load">31% capacity</span></div>
-        <div class="hv-row"><span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Mainpat</span><span class="load">22% capacity</span></div>
-      </div>
+        <div class="map-card" style="height: auto;">
+            <div id="cg-map" style="height: 140px; width: 100%; border-radius: 10px; background: #e5e7eb; z-index: 1;"></div>
+            <div class="map-legend" style="margin-top: 8px; font-size: 11px;">
+                <span><span class="legend-dot" style="background:var(--emerald);"></span>Low</span>
+                <span><span class="legend-dot" style="background:var(--amber);"></span>Moderate</span>
+                <span><span class="legend-dot" style="background:var(--crimson);"></span>High</span>
+            </div>
+        </div>
+        
+        <div class="hv-list" style="margin-top: 8px;">
+            <div class="hv-row" style="padding: 4px 0;"><span class="place"><span class="status-dot" id="badge-chitrakote"></span>Chitrakote Falls</span></div>
+            <div class="hv-row" style="padding: 4px 0;"><span class="place"><span class="status-dot" id="badge-kanger"></span>Kanger Valley N.P.</span></div>
+            <div class="hv-row" style="padding: 4px 0;"><span class="place"><span class="status-dot" id="badge-tirathgarh"></span>Tirathgarh Falls</span></div>
+            <div class="hv-row" style="padding: 4px 0;"><span class="place"><span class="status-dot" id="badge-mainpat"></span>Mainpat</span></div>
+        </div>
     </div>
-  </div>
+
+    <div style="background: var(--surface); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); padding: 18px; display: flex; flex-direction: column;">
+        <div class="hv-head" style="margin-bottom: 10px;">
+            <span class="lbl" style="font-size: 11px;">PRODUCT DEMO</span>
+            <span class="live" style="color: var(--forest);"><span class="live-dot" style="background: var(--forest);"></span>PREVIEW</span>
+        </div>
+        <div style="background: #000; border-radius: 12px; overflow: hidden; height: 215px; display: flex; align-items: center; justify-content: center;">
+            <video controls autoplay muted loop style="width: 100%; height: 100%; object-fit: cover; display: block;">
+                <source src="assests/Smart_tourism_app_product_demo_202609061108_erasio.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+</div>
 </section>
 
 <section class="how" id="how">
@@ -384,8 +401,8 @@
    <div class="dest-grid">
   <!-- 1. Chitrakote Falls -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/chitrakote.jpg'); background-size: cover; background-position: center;">
-      <span class="status-dot" style="background:var(--crimson);"></span>
+    <div class="dest-thumb thumb-1" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/chitrakote.jpg'); background-size: cover; background-position: center;">
+      <span class="status-dot" id="dot-chitrakote" style="background:var(--crimson);"></span>
       <span class="load-badge" id="badge-chitrakote"><span class="status-dot" style="background:var(--crimson); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">
@@ -398,8 +415,8 @@
 
   <!-- 2. Tirathgarh Falls -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-2" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/tirathgarh.jpg'); background-size: cover; background-position: center;">
-      <span class="status-dot" style="background:var(--emerald);"></span>
+    <div class="dest-thumb thumb-2" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/tirathgarh.jpg'); background-size: cover; background-position: center;">
+      <span class="status-dot" id="dot-tirathgarh" style="background:var(--emerald);"></span>
       <span class="load-badge" id="badge-tirathgarh"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">
@@ -411,8 +428,8 @@
 
   <!-- 3. Kanger Valley National Park -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-3" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/kanger.jpg'); background-size: cover; background-position: center;">
-      <span class="status-dot" style="background:var(--amber);"></span>
+    <div class="dest-thumb thumb-3" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/kanger.jpg'); background-size: cover; background-position: center;">
+      <span class="status-dot" id="dot-kanger" style="background:var(--amber);"></span>
       <span class="load-badge" id="badge-kanger"><span class="status-dot" style="background:var(--amber); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">
@@ -424,8 +441,8 @@
 
   <!-- 4. Kutumsar Caves -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-4" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/kutumsar.jpg'); background-size: cover; background-position: center;">
-       <span class="status-dot" style="background:var(--emerald);"></span>
+    <div class="dest-thumb thumb-4" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/kutumsar.jpg'); background-size: cover; background-position: center;">
+       <span class="status-dot" id="dot-kutumsar" style="background:var(--emerald);"></span>
        <span class="load-badge" id="badge-kutumsar"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">
@@ -437,8 +454,8 @@
 
   <!-- 5. Bhoramdeo Temple -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-5" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/bhoramdeo.jpg'); background-size: cover; background-position: center;">
-         <span class="status-dot" style="background:var(--amber);"></span>
+    <div class="dest-thumb thumb-5" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/bhoramdeo.jpg'); background-size: cover; background-position: center;">
+         <span class="status-dot" id="dot-bhoramdeo" style="background:var(--amber);"></span>
          <span class="load-badge" id="badge-bhoramdeo"><span class="status-dot" style="background:var(--amber); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">
@@ -450,8 +467,8 @@
 
   <!-- 6. Mainpat -->
   <div class="dest-card">
-    <div class="dest-thumb thumb-6" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assests/mainpat.jpg'); background-size: cover; background-position: center;">
-         <span class="status-dot" style="background:var(--emerald);"></span>
+    <div class="dest-thumb thumb-6" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.6)), url('assets/mainpat.jpg'); background-size: cover; background-position: center;">
+         <span class="status-dot" id="dot-mainpat" style="background:var(--emerald);"></span>
          <span class="load-badge" id="badge-mainpat"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Loading...</span>
     </div>
     <div class="dest-body">

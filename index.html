@@ -798,37 +798,49 @@
         </button>
     </div>
 </div>
-<!-- Live Regional Crowd Heatmap & Radar View -->
+<!-- Local Artisan & Handloom Marketplace Widget -->
 <div class="mchip" style="background: linear-gradient(145deg, #1e3f20, #142a15); border-radius: 16px; padding: 24px; color: white; box-shadow: 0 8px 24px rgba(30, 63, 32, 0.2); border: 1px solid rgba(52, 211, 153, 0.3); transition: transform 0.3s ease;">
     <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-        <div style="background: rgba(52, 211, 153, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px;">🗺️</div>
+        <div style="background: rgba(245, 158, 11, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px;">🧵</div>
         <div>
-            <h4 style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">Regional Heatmap</h4>
-            <span style="font-size: 12px; color: #34d399; display: flex; align-items: center; margin-top: 2px;">
-                <span class="live-indicator"></span> Radar Telemetry Live
+            <h4 style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">Artisan Marketplace</h4>
+            <span style="font-size: 12px; color: #f59e0b; display: flex; align-items: center; margin-top: 2px;">
+                <span style="width: 8px; height: 8px; background: #f59e0b; border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 8px #f59e0b;"></span> Direct Rural Economy
             </span>
         </div>
     </div>
     
     <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 16px; line-height: 1.5;">
-        Macro-level density monitoring across Chhattisgarh tourism zones to predict traffic spikes before arrival.
+            Support local tribal artisans by exploring authentic Bastar Dokra craft, Kosa silk, and handloom products directly.
     </p>
 
-    <!-- Radar Telemetry Display Box -->
-    <div style="background: rgba(0, 0, 0, 0.25); border-radius: 12px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.1);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-size: 13px;">
-            <span style="color: #cbd5e1;">🟢 Bastar Circuit:</span>
-            <span style="color: #34d399; font-weight: 600;">Optimal Flow</span>
+    <!-- Interactive Marketplace Box -->
+    <!-- Marketplace Box with Product Images -->
+<div style="background: rgba(0, 0, 0, 0.25); border-radius: 12px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.1);">
+    
+    <!-- Product 1 -->
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+        <img src="assests/dokra-craft.jpg" alt="Dokra Craft" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="flex-grow: 1; font-size: 13px;">
+            <div style="color: #cbd5e1;">Bastar Dokra Figurine</div>
+            <div style="color: #34d399; font-weight: 600;">₹1,200</div>
         </div>
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-size: 13px;">
-            <span style="color: #cbd5e1;">🟡 Surguja Circuit:</span>
-            <span style="color: #f59e0b; font-weight: 600;">Moderate Rush</span>
-        </div>
-
-        <button onclick="toggleRadarView()" style="width: 100%; background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; transition: background 0.2s;">
-            🔍 Expand Interactive Radar Map
-        </button>
     </div>
+
+    <!-- Product 2 -->
+    <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+        <img src="assests/kosa-silk.jpeg" alt="Kosa Silk" style="width: 45px; height: 45px; border-radius: 8px; object-fit: cover; border: 1px solid rgba(255,255,255,0.2);">
+        <div style="flex-grow: 1; font-size: 13px;">
+            <div style="color: #cbd5e1;">Champa Kosa Silk Stole</div>
+            <div style="color: #34d399; font-weight: 600;">₹2,500</div>
+        </div>
+    </div>
+
+    <button onclick="openArtisanCatalog()" style="width: 100%; background: #f59e0b; color: #111; border: none; padding: 10px; border-radius: 8px; font-size: 13px; font-weight: bold; cursor: pointer; transition: opacity 0.2s;">
+        🛍️ View Full Artisan Catalog
+    </button>
+    </div>
+</div>
 </div>
 </section>
 
@@ -1526,5 +1538,8 @@ function triggerEmergencySOS() {
 }
 function toggleRadarView() {
     alert("🗺️ Radar Telemetry Expanded: Syncing regional district nodes across Bastar and Surguja live clusters.");
+}
+function openArtisanCatalog() {
+    alert("🛍️ Artisan Catalog Opened: Connecting you directly to certified cooperative weavers and metal-craft artisans across Bastar and Janjgir.");
 }
 </script>

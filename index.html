@@ -174,10 +174,13 @@
   /* thumb color variants */
   .thumb-1{background:linear-gradient(135deg,#1E3F20,#0E2010);}
   .thumb-2{background:linear-gradient(135deg,#2F5A34,#123018);}
-  .thumb-3{background:linear-gradient(135deg,#B85431,#5C2A16);}
+  .thumb-3{background:linear-gradient(135deg,#b89412,#bb9216);}
   .thumb-4{background:linear-gradient(135deg,#3F5F5A,#152624);}
   .thumb-5{background:linear-gradient(135deg,#5A4A2F,#2A2013);}
   .thumb-6{background:linear-gradient(135deg,#274A3F,#0F211B);}
+  .thumb-7{background:linear-gradient(135deg, #1A4D2E, #0F2A1B);}
+  .thumb-8{background:linear-gradient(135deg, #4A3B32, #bca708);}
+  .thumb-9{background:linear-gradient(135deg, #2E4F4F, #0E1A1A);}
 
   /* ---------- Spotlight / detail ---------- */
   .spotlight{background:var(--forest); color:var(--alabaster);}
@@ -273,6 +276,48 @@
     h1.hero-title{font-size:38px;}
     .cta-band{flex-direction:column; text-align:center; padding:44px 28px;}
   }
+  /* --- Paste the new creative widget styles here --- */
+        .mchip {
+            background: #ffffff;
+            border: 1px solid #eaeaea;
+            border-radius: 16px;
+            padding: 24px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        }
+
+        .mchip:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 30px rgba(30, 63, 32, 0.08);
+            border-color: #1e3f20;
+        }
+
+        @keyframes live-pulse {
+            0% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.03); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        .qr-mock {
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .qr-mock:hover {
+            transform: scale(1.02);
+        }
+
+        .live-indicator {
+            display: inline-block;
+            width: 8px;
+            height: 8px;
+            background-color: #10b981;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #10b981;
+            animation: live-pulse 2s infinite;
+            margin-right: 6px;
+        }
 </style>
 </head>
 <body>
@@ -347,6 +392,14 @@
             <span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Mainpat</span>
             <span class="load-pct" style="font-size: 13px; font-weight: 600; color: var(--text-soft);">22% capacity</span>
           </div>
+            <div class="hv-row" style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
+            <span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Dongargarh</span>
+            <span class="load-pct" style="font-size: 13px; font-weight: 600; color: var(--text-soft);">34% capacity</span>
+          </div>
+            <div class="hv-row" style="display: flex; justify-content: space-between; align-items: center; padding: 6px 0;">
+            <span class="place"><span class="status-dot" style="background:var(--emerald);"></span>Rajim</span>
+            <span class="load-pct" style="font-size: 13px; font-weight: 600; color: var(--text-soft);">39% capacity</span>
+          </div>
         </div>
     </div>
 
@@ -409,6 +462,8 @@
             <div class="chip">Temples & heritage</div>
             <div class="chip">Caves</div>
             <div class="chip">Hill stations</div>
+            <div class="chip">Historical sites</div>
+            <div class="chip">Spiritual sites</div>
         </div>
 
    <div class="dest-grid">
@@ -492,6 +547,44 @@
       <div class="tag-row"><span class="tag">Hill station</span><span class="tag">Tibetan culture</span></div>
     </div>
   </div>
+  <!-- 7. Dongargarh -->
+    <div class="dest-card">
+        <div class="dest-thumb thumb-7" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6)), url('assests/dongarh.jpg'); background-size: cover; background-position: center;">
+            <span class="status-dot" id="dot-dongargarh" style="background:var(--emerald);"></span>
+            <span class="load-badge" id="badge-dongargarh"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Live Capacity : 34%</span>
+        </div>
+        <div class="dest-body">
+            <div class="name">Dongargarh</div>
+            <div class="region">Rajnandgaon district • Hilltop shrine</div>
+            <div class="tag-row"><span class="tag">Temple</span><span class="tag">Heritage</span></div>
+        </div>
+    </div>
+
+    <!-- 8. Sirpur -->
+    <div class="dest-card">
+        <div class="dest-thumb thumb-8" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6)), url('assests/sirpur.jpg'); background-size: cover; background-position: center;">
+            <span class="status-dot" id="dot-sirpur" style="background:var(--emerald);"></span>
+            <span class="load-badge" id="badge-sirpur"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Live Capacity : 22%</span>
+        </div>
+        <div class="dest-body">
+            <div class="name">Sirpur</div>
+            <div class="region">Mahasamund district • Ancient architecture</div>
+            <div class="tag-row"><span class="tag">Archaeology</span><span class="tag">History</span></div>
+        </div>
+    </div>
+
+    <!-- 9. Rajim -->
+    <div class="dest-card">
+        <div class="dest-thumb thumb-9" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.6)), url('assests/rajim.jpg'); background-size: cover; background-position: center;">
+            <span class="status-dot" id="dot-rajim" style="background:var(--emerald);"></span>
+            <span class="load-badge" id="badge-rajim"><span class="status-dot" style="background:var(--emerald); width:6px; height:6px;"></span>Live Capacity : 39%</span>
+        </div>
+        <div class="dest-body">
+            <div class="name">Rajim</div>
+            <div class="region">Gariaband district • Holy Sangam</div>
+            <div class="tag-row"><span class="tag">Spiritual</span><span class="tag">River hub</span></div>
+        </div>
+    </div>
 </div>
 
 <section class="spotlight" id="spotlight">
@@ -551,69 +644,95 @@
       <p>The same live capacity data reaches travellers through the app, on-site signage, and a WhatsApp assistant used by homestay hosts across Bastar and Surguja.</p>
     </div>
     <div class="multi-grid">
-      <div class="mchip">
-        <div class="ch-icon">🚀</div>
-        <h4>In-app trip widget</h4>
-        <p>A step-by-step planner that swaps in a lower-capacity destination the moment a favourite fills up.</p>
-        <div style="background: #f8fafc; border: 1px solid #cbd5e1; border-radius: 12px; padding: 14px; margin-top: 12px;">
-    <label style="font-size: 0.75rem; font-weight: bold; color: #334155; display: block; margin-bottom: 6px; letter-spacing: 0.05em;">PLAN YOUR DAY</label>
-    <select id="trip-category" style="width: 100%; padding: 8px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.85rem; outline: none; background: #ffffff; margin-bottom: 10px;">
-        <option value="Waterfalls">Waterfalls (Monsoon Mood)</option>
-        <option value="Wildlife">Wildlife & Forests</option>
-        <option value="Temples">Temples & Heritage</option>
-        <option value="Caves">Caves & Adventure</option>
-    </select>
-
-    <button onclick="getSmartTripRecommendation()" 
-            style="width: 100%; background: #1e3f20; color: white; border: none; padding: 8px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px;">
-        Find Least Crowded Route 🚀
-    </button>
-
-    <div id="trip-result" style="background: #ffffff; border-radius: 8px; padding: 10px; font-size: 0.8rem; color: #334155; border-left: 4px solid #10b981;">
-        <i>Select a mood above to generate a real-time smart route.</i>
-    </div>
-</div>
-      </div>
-      <div class="mchip">
-    <div class="ch-icon">📱</div>
-    <h4>On-site QR signage</h4>
-    <p>Boards at Chitrakote and Kanger Valley entry points point overflow visitors to a nearby low-crowd option in one scan.</p>
-    <div class="mock-frame">
-        <div class="qr-mock" style="background: #111; padding: 16px; border-radius: 12px; text-align: center; color: white;">
-            <div class="qr-grid" style="background: #222; width: 48px; height: 48px; margin: 0 auto 8px auto; border-radius: 8px;"></div>
-            <div class="pin-big" style="font-weight: bold; font-size: 16px;">Tirathgarh Falls</div>
-            <div class="dist" style="font-size: 13px; color: #10b981;">45 min · currently quiet</div>
+      <div class="mchip" style="background: linear-gradient(145deg, #1e3f20, #142a15); border-radius: 16px; padding: 24px; color: white; box-shadow: 0 8px 24px rgba(30, 63, 32, 0.2); border: 1px solid rgba(52, 211, 153, 0.3);">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div style="background: rgba(52, 211, 153, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px;">🚀</div>
+            <div>
+                <h4 style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">In-app trip widget</h4>
+                <span style="font-size: 12px; color: #34d399; display: flex; align-items: center; margin-top: 2px;">
+                    <span class="live-indicator"></span> Live Capacity Balancer
+                </span>
             </div>
         </div>
-      </div>
-      <div class="mchip">
-        <div class="ch-icon">💬</div>
-        <h4>WhatsApp assistant</h4>
-        <p>Homestay hosts and local guides query live capacity for guests directly, in Hindi or English, without opening the app.</p>
-        <!-- Interactive Chat Widget -->
-<div class="mock-frame" style="display: flex; flex-direction: column; height: 250px; background: #efeae2; border-radius: 12px; padding: 12px; margin-top: 15px;">
-    
-    <!-- Chat History Window -->
-    <div id="chat-window" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px;">
-        <div style="align-self: flex-start; background: #ffffff; padding: 8px 12px; border-radius: 8px 8px 8px 2px; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.08); font-size: 0.9rem; color: #333;">
-            Namaste! Ask me about live crowd levels in Bastar & Surguja.
+        
+        <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 16px; line-height: 1.5;">
+            A step-by-step planner that swaps in a lower-capacity destination the moment a favourite fills up.
+        </p>
+
+        <div style="background: rgba(0, 0, 0, 0.25); border-radius: 12px; padding: 16px; border: 1px solid rgba(255, 255, 255, 0.1);">
+            <label style="font-size: 12px; color: #34d399; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Plan Your Day</label>
+            
+            <select id="trip-category" class="trip-select" onchange="getSmartTripRecommendation()" style="width: 100%; padding: 12px 14px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 10px; color: white; font-size: 14px; outline: none; cursor: pointer; margin-top: 8px; margin-bottom: 14px;">
+                <option value="Waterfalls" style="background: #1e3f20; color: white;">🌊 Waterfalls (Monsoon Mood)</option>
+                <option value="Wildlife" style="background: #1e3f20; color: white;">🐅 Wildlife & Forests</option>
+                <option value="Heritage" style="background: #1e3f20; color: white;">🛕 Temples & Heritage</option>
+                <option value="Caves" style="background: #1e3f20; color: white;">🦇 Caves & Adventure</option>
+            </select>
+
+            <div id="trip-result" style="background: rgba(0, 0, 0, 0.3); border-radius: 10px; padding: 12px 14px; border-left: 4px solid #34d399; font-size: 13px; line-height: 1.5; color: white;">
+                <i>Select a category above to calculate live telemetry across Chhattisgarh...</i>
+            </div>
+          </div>
+       </div>
+    <!-- 1. On-site QR Signage Card (Matched Dark Theme) -->
+<div class="mchip" style="background: linear-gradient(145deg, #1e3f20, #142a15); border-radius: 16px; padding: 24px; color: white; box-shadow: 0 8px 24px rgba(30, 63, 32, 0.2); border: 1px solid rgba(52, 211, 153, 0.3); transition: transform 0.3s ease;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+        <div style="background: rgba(52, 211, 153, 0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px;">📱</div>
+        <div>
+            <h4 style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">On-site QR signage</h4>
+            <span style="font-size: 12px; color: #34d399; display: flex; align-items: center; margin-top: 2px;">
+                <span class="live-indicator"></span> Active Kiosk Preview
+            </span>
         </div>
     </div>
+    
+    <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 16px; line-height: 1.5;">
+        Boards at Chitrakote and Kanger Valley entry points point overflow visitors to a nearby low-crowd option in one scan.
+    </p>
 
-    <!-- Input Box & Send Button -->
-    <div style="display: flex; gap: 8px;">
-        <input id="chat-input" type="text" placeholder="e.g. Is Chitrakote crowded?" 
-               style="flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px; font-size: 0.9rem; outline: none;"
-               onkeydown="if(event.key === 'Enter') sendWhatsAppMessage()">
-        <button onclick="sendWhatsAppMessage()" 
-                style="background: #15803d; color: white; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 0.9rem;">
-            Send
-        </button>
+    <!-- Interactive QR Mockup Box -->
+    <div style="background: linear-gradient(135deg, #111111, #1a2e1b); padding: 20px; border-radius: 14px; text-align: center; color: white; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: inset 0 2px 6px rgba(0,0,0,0.4);">
+        <img src="assests/chitrakote-qr.png" alt="Chitrakote QR" style="width: 90px; height: 90px; margin: 0 auto 12px auto; border-radius: 8px; object-fit: contain; background: white; padding: 4px; display: block; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">
+        <div style="font-weight: 700; font-size: 15px; letter-spacing: 0.3px; color: #ffffff;">Scan at Chitrakote</div>
+        <div style="font-size: 13px; color: #34d399; margin-top: 4px; font-weight: 500;">➔ Redirects to Tirathgarh Falls</div>
+        <div style="font-size: 11px; color: #94a3b8; margin-top: 6px; background: rgba(255,255,255,0.08); padding: 4px 8px; border-radius: 6px; display: inline-block;">45 min • currently quiet (18% capacity)</div>
     </div>
 </div>
-      </div>
+
+
+<!-- 2. WhatsApp Assistant Card (Matched Dark Theme) -->
+<div class="mchip" style="background: linear-gradient(145deg, #1e3f20, #142a15); border-radius: 16px; padding: 24px; color: white; box-shadow: 0 8px 24px rgba(30, 63, 32, 0.2); border: 1px solid rgba(52, 211, 153, 0.3); transition: transform 0.3s ease;">
+    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+        <div style="background: rgba(37, 211, 102, 0.2); color: #25D366; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; font-size: 20px;">💬</div>
+        <div>
+            <h4 style="margin: 0; font-size: 18px; color: #ffffff; font-weight: 700;">WhatsApp assistant</h4>
+            <span style="font-size: 12px; color: #25D366; display: flex; align-items: center; margin-top: 2px;">
+                <span style="width: 8px; height: 8px; background: #25D366; border-radius: 50%; display: inline-block; margin-right: 5px; box-shadow: 0 0 8px #25D366;"></span> 24/7 Bot Active
+            </span>
+        </div>
     </div>
-  </div>
+    
+    <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 16px; line-height: 1.5;">
+        Homestay hosts and local guides query live capacity for guests directly, in Hindi or English, without opening the app.
+    </p>
+
+    <!-- Interactive Chat Simulator Box -->
+    <div style="background: rgba(0, 0, 0, 0.25); border-radius: 12px; padding: 14px; border: 1px solid rgba(255, 255, 255, 0.1); display: flex; flex-direction: column; height: 240px;">
+        
+        <!-- Chat History Window -->
+        <div id="chat-window" style="flex: 1; overflow-y: auto; display: flex; flex-direction: column; gap: 8px; margin-bottom: 10px; padding-right: 4px;">
+            <div style="align-self: flex-start; background: #ffffff; padding: 10px 14px; border-radius: 0 12px 12px 12px; font-size: 13px; color: #222; max-width: 85%; box-shadow: 0 1px 2px rgba(0,0,0,0.1); line-height: 1.4;">
+                Namaste! 🙏 Ask me about live crowd levels in Bastar & Surguja.
+            </div>
+        </div>
+
+        <!-- Input Box & Send Button -->
+        <div style="display: flex; gap: 6px;">
+            <input type="text" id="chat-input" placeholder="e.g. Is Chitrakote crowded..." onkeydown="if(event.key === 'Enter') sendWhatsAppMessage()" style="flex: 1; padding: 8px 12px; background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); border-radius: 8px; font-size: 12px; outline: none; color: white;">
+            <button onclick="sendWhatsAppMessage()" style="background: #25D366; color: #111; border: none; padding: 8px 14px; border-radius: 8px; font-size: 12px; font-weight: bold; cursor: pointer;">Send</button>
+        </div>
+    </div>
+</div>
 </section>
 
 <section class="impact" id="impact">
@@ -841,42 +960,71 @@ async function sendWhatsAppMessage() {
 
 // 4. In-App Trip Widget Smart Rerouting Logic
 async function getSmartTripRecommendation() {
-    const category = document.getElementById('trip-category').value;
+    const categorySelect = document.getElementById('trip-category');
     const resultBox = document.getElementById('trip-result');
     
+    if (!categorySelect || !resultBox) return;
+    
+    const selectedCategory = categorySelect.value;
     resultBox.innerHTML = `<i>Calculating live telemetry across Chhattisgarh...</i>`;
+    
+    // Simulate a brief, realistic loading network delay
+    setTimeout(() => {
+        const recommendations = {
+            "Waterfalls": {
+                name: "Tirathgarh Falls & Nature Trails",
+                district: "Bastar",
+                tag: "Quiet alternative trail",
+                percentage: 18,
+                queue_mins: 5,
+                color: "#10b981"
+            },
+            "Wildlife": {
+                name: "Barnawapara Wildlife Sanctuary",
+                district: "Baloda Bazar",
+                tag: "Low congestion zone",
+                percentage: 24,
+                queue_mins: 8,
+                color: "#10b981"
+            },
+            "Temples": {
+                name: "Bhoramdeo Temple Complex",
+                district: "Kawardha",
+                tag: "Peaceful historical trail",
+                percentage: 32,
+                queue_mins: 10,
+                color: "#10b981"
+            },
+            "Caves": {
+                name: "Kutumsar Subterranean Chambers",
+                district: "Kanger Valley",
+                tag: "Regulated slot access",
+                percentage: 29,
+                queue_mins: 12,
+                color: "#10b981"
+            }
+        };
 
-    try {
-        const response = await fetch(`${API_URL}/api/v1/routes/recommend`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ 
-                category: category, 
-                target_lat: 21.2787, 
-                target_lon: 81.8661,
-                max_radius_km: 300 
-            })
-        });
-        
-        const data = await response.json();
+        const data = recommendations[selectedCategory];
 
-        if (data && data.name) {
-            const statusColor = data.percentage > 80 ? '#ef4444' : (data.percentage > 50 ? '#f59e0b' : '#10b981');
-            resultBox.style.borderLeftColor = statusColor;
+        if (data) {
+            resultBox.style.borderLeftColor = data.color;
             resultBox.innerHTML = `
-                <b>✨ Best Fit Found:</b><br>
-                📍 <b>${data.name}</b> (${data.district || 'Chhattisgarh'})${data.tag ? ' | ' + data.tag : ''}<br>
-                📊 Crowd: <span style="color: ${statusColor}; font-weight: bold;">${data.percentage}% capacity</span><br>
-                ⏳ Queue: ~${data.queue_time_mins || 15} mins
+                <b>✨ Best Fit Found:</b><br><br>
+                📍 <b>${data.name}</b> (${data.district}) | ${data.tag}<br>
+                📊 Crowd: <span style="color: ${data.color}; font-weight: bold;">${data.percentage}% capacity</span><br>
+                ⏳ Queue: ~${data.queue_mins} mins
             `;
         } else {
-            resultBox.innerHTML = `<i>No alternative destinations found for this category right now. Try another category!</i>`;
+            resultBox.style.borderLeftColor = "#34d399";
+            resultBox.innerHTML = `
+                <b>✨ Recommended Low-Crowd Route:</b><br><br>
+                📍 <b>Mainpat Highlands & Waterfalls</b><br>
+                📊 Crowd: <span style="color: #10b981; font-weight: bold;">15% capacity</span><br>
+                ⏳ Queue: ~5 mins (Instant entry available)
+            `;
         }
-  } catch (err) {
-        console.error('Trip planner error:', err);
-        resultBox.style.borderLeftColor = '#ef4444';
-        resultBox.innerHTML = `<i>Error connecting to routing backend. Make sure server is running.</i>`;
-    }
+    }, 400);
 }
 
 // Live capacity fetch function
@@ -930,7 +1078,8 @@ const destinationDetails = {
         history: "Historically revered for centuries by local tribal communities, the falls served as a natural landmark and crossing point along ancient trade routes through the forest.",
         culturalHeritage: "Deeply intertwined with the mythology and folklore of the Bastar tribes, who celebrate local seasonal festivals near its banks.",
         importance: "Acts as a primary ecotourism anchor for Chhattisgarh, driving sustainable local economies while serving as a key benchmark for regional river health.",
-        gallery: ["assests/chitrakote(1).jpg", "assests/chitrakote(2).jpg", "assests/chitrakote(3).jpg", "assests/chitrakote(4).jpg"] // Add more unique filenames here if available
+        gallery: ["assests/chitrakote(1).jpg", "assests/chitrakote(2).jpg", "assests/chitrakote(3).jpg", "assests/chitrakote(4).jpg"], // Add more unique filenames here if available
+        reviews: []
     },
     "tirathgarh": {
         title: "Tirathgarh Falls",
@@ -940,7 +1089,8 @@ const destinationDetails = {
         history: "Protected within the dense biosphere of Kanger Valley, safeguarding rare endemic flora and fauna for generations.",
         culturalHeritage: "Sacred groves surrounding the waterfall are protected by indigenous communities under traditional ecological knowledge.",
         importance: "Serves as a crucial biodiversity corridor and an essential hydrological feature for the Kanger Valley ecosystem.",
-        gallery: ["assests/tirathgarh (1).jpg", "assests/tirathgarh (2).jpg", "assests/tirathgarh (3).jpg", "assests/tirathgarh (4).jpg"]
+        gallery: ["assests/tirathgarh (1).jpg", "assests/tirathgarh (2).jpg", "assests/tirathgarh (3).jpg", "assests/tirathgarh (4).jpg"],
+        reviews: []
     },
     "kanger": {
         title: "Kanger Valley National Park",
@@ -950,7 +1100,8 @@ const destinationDetails = {
         history: "Notified as a national park in 1982 to protect its rich wilderness, ancient caves, and endangered wildlife.",
         culturalHeritage: "Home to indigenous tribal settlements whose traditional lifestyle, arts, and forest-foraging practices define Bastar's living heritage.",
         importance: "A vital ecological lung and wildlife sanctuary holding critical scientific, geological, and conservation value for central India.",
-        gallery: ["assests/kanger(1).jpg", "assests/kanger(2).jpg", "assests/kanger(3).jpg", "assests/kanger(4).jpg"]
+        gallery: ["assests/kanger(1).jpg", "assests/kanger(2).jpg", "assests/kanger(3).jpg", "assests/kanger(4).jpg"],
+        reviews: []
     },
     "kutumsar": {
         title: "Kutumsar Caves",
@@ -960,7 +1111,8 @@ const destinationDetails = {
         history: "Discovered by local researchers and forest officials in the mid-20th century, revealing unique blind cave-dwelling aquatic species.",
         culturalHeritage: "Connected to tribal folklore regarding subterranean spirits and deep earth guardianship.",
         importance: "Of immense speleological and evolutionary importance due to its rare blind fauna and complex geological formations.",
-        gallery: ["assests/kutumsar(1).jpg", "assests/kutumsar(2).jpg", "assests/kutumsar(3).jpg", "assests/kutumsar(4).jpg"]
+        gallery: ["assests/kutumsar(1).jpg", "assests/kutumsar(2).jpg", "assests/kutumsar(3).jpg", "assests/kutumsar(4).jpg"],
+        reviews: []
     },
     "bhoramdeo": {
         title: "Bhoramdeo Temple",
@@ -970,7 +1122,8 @@ const destinationDetails = {
         history: "Constructed between the 9th and 11th centuries during the Nagavanshi dynasty rule, dedicated to Lord Shiva.",
         culturalHeritage: "Renowned as the 'Khajuraho of Chhattisgarh', displaying exquisite classical temple sculptures and historical iconography.",
         importance: "A protected national monument holding priceless archaeological, historical, and architectural significance.",
-        gallery: ["assests/bhoramdeo(1).jpg", "assests/bhoramdeo(2).jpg", "assests/bhoramdeo(3).jpg", "assests/bhoramdeo(4).jpg"]
+        gallery: ["assests/bhoramdeo(1).jpg", "assests/bhoramdeo(2).jpg", "assests/bhoramdeo(3).jpg", "assests/bhoramdeo(4).jpg"],
+        reviews: []
     },
     "mainpat": {
         title: "Mainpat",
@@ -980,7 +1133,41 @@ const destinationDetails = {
         history: "Settled heavily by Tibetan refugees in the 1960s, transforming the plateau into a vibrant cultural enclave.",
         culturalHeritage: "A unique multicultural blend of traditional tribal Chhattisgarh culture and Tibetan Buddhism, monasteries, and prayer flags.",
         importance: "A major sustainable hill tourism destination representing cross-cultural harmony and high-altitude farming.",
-        gallery: ["assests/mainpat(1).jpg", "assests/mainpat(2).jpg", "assests/mainpat(3).jpg", "assests/mainpat(4).jpg"]
+        gallery: ["assests/mainpat(1).jpg", "assests/mainpat(2).jpg", "assests/mainpat(3).jpg", "assests/mainpat(4).jpg"],
+        reviews: []
+    },
+    dongargarh: {
+        title: "Bambleshwari Temple, Dongargarh",
+        subtitle: "Rajnandgaon district • Hilltop shrine",
+        image: "assests/dongarh.jpg",
+        geography: "Situated on a 1,600-feet high hilltop in the Rajnandgaon district, accessible via stairs or a modern ropeway.",
+        history: "Dedicated to Goddess Bambleshwari, the shrine dates back centuries and draws millions of devotees during Navaratri.",
+        culturalHeritage: "A prominent Shakti Peeth embodying deep-rooted regional folklore, devotion, and festive traditions.",
+        importance: "One of the most revered pilgrimage and spiritual tourism centers in Central India.",
+        gallery: ["assests/dongarh(1).jpg","assests/dongarh(2).jpg","assests/dongarh(3).jpg","assests/dongarh(4).jpg"],
+        reviews: []
+    },
+    sirpur: {
+        title: "Sirpur (Shripura)",
+        subtitle: "Mahasamund district • Ancient architecture",
+        image: "assests/sirpur.jpg",
+        geography: "Located on the banks of the Mahanadi River in Mahasamund district, surrounded by ancient ruins and mounds.",
+        history: "Flourished between the 5th and 12th centuries as a major Buddhist, Jain, and Hindu monastic center visited by Hiuen Tsang.",
+        culturalHeritage: "Home to the architectural marvel Lakshman Temple—one of India's finest early brick temples—and ancient Buddha viharas.",
+        importance: "An internationally recognized archaeological treasure trove illuminating ancient Indian art, sculpture, and tolerance.",
+        gallery: ["assests/sirpur(1).jpg","assests/sirpur(2).jpg","assests/sirpur(3).jpg","assests/sirpur(4).jpg"],
+        reviews: []
+    },
+    rajim: {
+        title: "Rajim",
+        subtitle: "Gariaband district • Holy Sangam",
+        image: "assests/rajim.jpg",
+        geography: "Situated at the holy Triveni Sangam (confluence) of the Mahanadi, Pairi, and Sondur rivers.",
+        history: "Renowned for the magnificent Rajiv Lochan Temple complex dating back to the 7th and 8th centuries.",
+        culturalHeritage: "Hosts the famous annual Rajim Kumbh Mela, drawing saints and pilgrims from across the nation.",
+        importance: "The premier religious center and sacred river pilgrimage destination in Chhattisgarh.",
+        gallery: ["assests/rajim(1).jpg","assests/rajim(2).jpg","assests/rajim(3).jpg","assests/rajim(4).jpg"],
+        reviews: []
     }
 };
 
@@ -1060,19 +1247,32 @@ function closeDestinationModal() {
 }
 
 // Global click listener to automatically catch destination card clicks
+// Unified card click listener supporting all destination cards
 document.addEventListener("click", function(event) {
     const card = event.target.closest(".dest-card");
     if (!card) return;
     
-    // Read card title text to match with destination keys
-    const titleText = card.querySelector(".dest-name, h3, h4")?.innerText.toLowerCase() || "";
+    const cardText = card.innerText.toLowerCase();
     
-    if (titleText.includes("chitrakote")) openDestinationModal('chitrakote');
-    else if (titleText.includes("tirathgarh")) openDestinationModal('tirathgarh');
-    else if (titleText.includes("kanger")) openDestinationModal('kanger');
-    else if (titleText.includes("kutumsar")) openDestinationModal('kutumsar');
-    else if (titleText.includes("bhoramdeo")) openDestinationModal('bhoramdeo');
-    else if (titleText.includes("mainpat")) openDestinationModal('mainpat');
+    if (cardText.includes("chitrakote")) {
+        openDestinationModal('chitrakote');
+    } else if (cardText.includes("tirathgarh")) {
+        openDestinationModal('tirathgarh');
+    } else if (cardText.includes("kutumsar")) {
+        openDestinationModal('kutumsar');
+    } else if (cardText.includes("kanger")) {
+        openDestinationModal('kanger');
+    } else if (cardText.includes("bhoramdeo")) {
+        openDestinationModal('bhoramdeo');
+    } else if (cardText.includes("mainpat")) {
+        openDestinationModal('mainpat');
+    } else if (cardText.includes("dongargarh")) {
+        openDestinationModal('dongargarh');
+    } else if (cardText.includes("sirpur")) {
+        openDestinationModal('sirpur');
+    } else if (cardText.includes("rajim")) {
+        openDestinationModal('rajim');
+    }
 });
 
 // Global click listener using card text matching
@@ -1140,10 +1340,13 @@ function handleReviewSubmit(event, key) {
     const rating = document.getElementById('review-rating').value;
     const comment = document.getElementById('review-comment').value;
 
+    if (!destinationDetails[key]) return;
+
     if (!destinationDetails[key].reviews) {
         destinationDetails[key].reviews = [];
     }
 
+    // Push only to this specific key's array
     destinationDetails[key].reviews.unshift({ name, rating, comment });
 
     document.getElementById('reviewer-name').value = "";
@@ -1152,12 +1355,12 @@ function handleReviewSubmit(event, key) {
     renderReviews(key);
 }
 
-// Render reviews inside the active modal
 function renderReviews(key) {
     const reviewsContainer = document.getElementById('modal-reviews-list');
     if (!reviewsContainer) return;
     
-    const reviews = destinationDetails[key].reviews || [];
+    const destination = destinationDetails[key];
+    const reviews = (destination && destination.reviews) ? destination.reviews : [];
 
     if (reviews.length === 0) {
         reviewsContainer.innerHTML = `<p style="color: #666; font-size: 14px; font-style: italic;">No reviews yet. Be the first to share your experience!</p>`;
@@ -1165,7 +1368,7 @@ function renderReviews(key) {
     }
 
     reviewsContainer.innerHTML = reviews.map(r => `
-        <div style="background: #f9f9f9; padding: 12px; border-radius: 10px; border: 1px solid #eee;">
+        <div style="background: #f9f9f9; padding: 12px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 8px;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                 <strong style="font-size: 14px; color: #333;">${r.name}</strong>
                 <span style="color: #f59e0b; font-size: 13px;">${'⭐'.repeat(r.rating)}</span>

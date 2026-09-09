@@ -12,7 +12,7 @@ Roots2Routes is a modern web application designed to tackle overcrowding at majo
 <img width="1375" height="785" alt="Screenshot 2026-09-09 210221" src="https://github.com/user-attachments/assets/8c54d65d-99e2-44e1-8b30-7ea898dd3e77" />
 <img width="1662" height="595" alt="Screenshot 2026-09-09 210230" src="https://github.com/user-attachments/assets/59e43312-bbda-4b32-afd1-e4543ae84078" />
 
-<img width="1265" height="899" alt="SIGN MAA" src="https://github.com/user-attachments/assets/33b8a73b-fed8-4ea2-9c48-233b9e0b6d06" />
+
 <img width="1670" height="720" alt="Screenshot 2026-09-09 210241" src="https://github.com/user-attachments/assets/d0a7fa36-2a21-4375-902e-7493618466e7" />
 
 ---
